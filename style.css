@@ -1,0 +1,119 @@
+/* Global */
+body {
+  margin: 0;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Advent Pro', sans-serif;
+}
+
+/* First Screen */
+#main {
+  text-align: center;
+  transition: opacity 1.5s ease;
+}
+
+#sun {
+  width: 150px;
+  cursor: pointer;
+  transition: transform 4s ease;
+}
+
+#title {
+  font-weight: 300;
+  font-size: 42px;
+  margin-top: 20px;
+  letter-spacing: 3px;
+}
+
+/* Spin */
+.spin {
+  transform: rotate(1080deg);
+}
+
+/* Fade */
+.fadeOut {
+  opacity: 0;
+}
+
+/* Welcome Screen */
+#welcomeScreen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 1.5s ease;
+}
+
+.showWelcome {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Subtle Sunflower Pattern */
+.pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 2px, transparent 3px),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05) 2px, transparent 3px),
+    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 2px, transparent 3px);
+  background-size: 200px 200px;
+  animation: drift 40s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* Welcome Text */
+#welcomeText {
+  font-size: 60px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  margin-bottom: 30px;
+  animation: reveal 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes reveal {
+  from {
+    letter-spacing: 20px;
+    opacity: 0;
+  }
+  to {
+    letter-spacing: 6px;
+    opacity: 1;
+  }
+}
+
+/* Countdown */
+#countdown {
+  font-size: 36px;
+  letter-spacing: 6px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 2s ease;
+}
+
+/* Reveal countdown */
+.showCountdown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Move to bottom */
+.moveBottom {
+  position: absolute;
+  bottom: 40px;
+}

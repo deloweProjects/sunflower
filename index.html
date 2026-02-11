@@ -2,32 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sunflower</title>
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: #fffbe6;
-    }
 
-    img {
-      width: 150px;
-      height: auto;
-    }
+  <!-- Advent Pro Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@300;600&display=swap" rel="stylesheet">
 
-    h1 {
-      margin-top: 16px;
-      color: #333;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <img src="sun.png" alt="Sunflower" />
-  <h1>my sunflower</h1>
+
+  <div id="main">
+    <img src="sun.png" id="sun" />
+    <h1 id="title">my sunflower</h1>
+  </div>
+
+  <div id="welcomeScreen">
+    <div class="pattern"></div>
+    <h2 id="welcomeText">Welcome</h2>
+    <div id="countdown"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
