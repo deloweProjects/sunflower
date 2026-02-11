@@ -1,4 +1,5 @@
 let clickCount = 0;
+
 const sun = document.getElementById("sun");
 const main = document.getElementById("main");
 const welcomeScreen = document.getElementById("welcomeScreen");
@@ -8,22 +9,27 @@ sun.addEventListener("click", () => {
   clickCount++;
 
   if (clickCount === 3) {
-    sun.classList.add("rotate");
+    sun.classList.add("spin");
 
     setTimeout(() => {
       main.classList.add("fadeOut");
 
       setTimeout(() => {
         welcomeScreen.classList.add("showWelcome");
-        startCountdown();
 
         setTimeout(() => {
-          countdownEl.classList.add("moveBottom");
-        }, 4000);
+          countdownEl.classList.add("showCountdown");
+          startCountdown();
+
+          setTimeout(() => {
+            countdownEl.classList.add("moveBottom");
+          }, 4000);
+
+        }, 2000);
 
       }, 1500);
 
-    }, 3000);
+    }, 4000);
   }
 });
 
