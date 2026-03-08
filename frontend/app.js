@@ -2,19 +2,23 @@
    Project Sunflower — app.js (Luxury Orchestrator)
 ═══════════════════════════════════════════════════════ */
 
+// --- Global API Sync ---
 let API_BASE_URL = window.CONFIG ? window.CONFIG.API_BASE_URL : '';
 
+// Sanitize URL
 if (API_BASE_URL && API_BASE_URL.endsWith('/')) {
     API_BASE_URL = API_BASE_URL.slice(0, -1);
 }
 
-if (!API_BASE_URL) {
-    console.warn("⚠️ API_BASE_URL is not set. Local testing defaults will be used.");
-} else if (window.location.hostname !== 'localhost' && API_BASE_URL.includes('localhost')) {
-    console.error("❌ CRITICAL: Your live site is trying to connect to a local backend. Update config.js with your Render URL!");
+// Diagnostics
+if (!window.CONFIG) {
+    console.error("❌ CRITICAL: config.js failed to load or window.CONFIG is missing.");
+} else if (!API_BASE_URL) {
+    console.warn("⚠️ API_BASE_URL is empty. Relative paths will be used (Local Only).");
 } else {
-    console.log(`✅ API Connection: ${API_BASE_URL}`);
+    console.log(`✅ API synchronized with: ${API_BASE_URL}`);
 }
+
 // ── Configuration ──────────────────────────
 // No hardcoded target date here — we fetch from the server for precision and security.
 
