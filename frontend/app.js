@@ -2,7 +2,7 @@
    Project Sunflower — app.js (Luxury Orchestrator)
 ═══════════════════════════════════════════════════════ */
 
-const API_BASE_URL = window.CONFIG ? window.CONFIG.API_BASE_URL : '';
+const API_BASE_URL = window.CONFIG ? window.CONFIG.API_BASE_URL : 'https://sunflower-fuz9.onrender.com/';
 
 if (!API_BASE_URL) {
     console.warn("⚠️ API_BASE_URL is not set. Local testing defaults will be used.");
