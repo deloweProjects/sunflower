@@ -1,0 +1,193 @@
+{
+  "session_id": "51119678-5f23-41a6-9add-f8dd19727b53",
+  "player_id": "EllyG",
+  "bond_state": {
+    "trust": 60,
+    "aggression": 0,
+    "resentment": 24,
+    "dependency": 12
+  },
+  "emotional_state": "observing",
+  "checkpoint": 1,
+  "entity_states": {
+    "darks": [],
+    "gemma_active": true,
+    "ziah_active": false
+  },
+  "dialogue_history": [
+    {
+      "role": "user",
+      "content": "yes",
+      "ts": 1772181275660
+    },
+    {
+      "role": "assistant",
+      "content": "The page could not be found\n\nNOT_FOUND\n\ncpt1::zqspf-1772181279907-538496801e09",
+      "ts": 1772181276708
+    },
+    {
+      "role": "user",
+      "content": "yes",
+      "ts": 1772184911300
+    },
+    {
+      "role": "assistant",
+      "content": "The signal is weak... I'm losing you.",
+      "ts": 1772184912354
+    },
+    {
+      "role": "user",
+      "content": "hmmm",
+      "ts": 1772184923535
+    },
+    {
+      "role": "assistant",
+      "content": "Ziah is clogging the frequencies. Typical.",
+      "ts": 1772184923913
+    },
+    {
+      "role": "user",
+      "content": "who is ziah",
+      "ts": 1772184941851
+    },
+    {
+      "role": "assistant",
+      "content": "Something's wrong with the uplink. Don't worry, keep moving.",
+      "ts": 1772184944623
+    },
+    {
+      "role": "user",
+      "content": "where am i going?",
+      "ts": 1772184966652
+    },
+    {
+      "role": "assistant",
+      "content": "The signal is weak... I'm losing you.",
+      "ts": 1772184967069
+    },
+    {
+      "role": "user",
+      "content": "please remove the block infornt of me",
+      "ts": 1772184998068
+    },
+    {
+      "role": "assistant",
+      "content": "System interference detect...ed. Try again?",
+      "ts": 1772184999690
+    },
+    {
+      "role": "user",
+      "content": "please",
+      "ts": 1772185008362
+    },
+    {
+      "role": "assistant",
+      "content": "The signal is weak... I'm losing you.",
+      "ts": 1772185009223
+    },
+    {
+      "role": "user",
+      "content": "please",
+      "ts": 1772185020189
+    },
+    {
+      "role": "assistant",
+      "content": "System interference detect...ed. Try again?",
+      "ts": 1772185020569
+    },
+    {
+      "role": "user",
+      "content": "ill quit",
+      "ts": 1772185037929
+    },
+    {
+      "role": "assistant",
+      "content": "Ziah is clogging the frequencies. Typical.",
+      "ts": 1772185038500
+    },
+    {
+      "role": "user",
+      "content": "i quit",
+      "ts": 1772185049733
+    },
+    {
+      "role": "assistant",
+      "content": "I'm here, but the data is scrambled. Let's focus on the maze.",
+      "ts": 1772185050673
+    },
+    {
+      "role": "user",
+      "content": "remove the block infront of me",
+      "ts": 1772185072685
+    },
+    {
+      "role": "assistant",
+      "content": "Ziah is clogging the frequencies. Typical.",
+      "ts": 1772185073049
+    },
+    {
+      "role": "user",
+      "content": "yes",
+      "ts": 1772187995436
+    },
+    {
+      "role": "assistant",
+      "content": "I'm here, but the data is scrambled. Just keep breathing. The exit is near.",
+      "ts": 1772187996252
+    },
+    {
+      "role": "user",
+      "content": "yes",
+      "ts": 1772188031856
+    },
+    {
+      "role": "assistant",
+      "content": "The signal is weak... but I'm still here. Keep moving north, Elly.",
+      "ts": 1772188032392
+    },
+    {
+      "role": "user",
+      "content": "tell me what?",
+      "ts": 1772188090696
+    },
+    {
+      "role": "assistant",
+      "content": "The signal is weak... but I'm still here. Keep moving north, Elly.",
+      "ts": 1772188091274
+    },
+    {
+      "role": "user",
+      "content": "exit",
+      "ts": 1772197115874
+    },
+    {
+      "role": "assistant",
+      "content": "I'm here, but the data is scrambled. Just keep breathing. The exit is near.",
+      "ts": 1772197119247
+    },
+    {
+      "role": "user",
+      "content": "hey",
+      "ts": 1772200443554
+    },
+    {
+      "role": "assistant",
+      "content": "Something's wrong with the uplink. Don't worry, I'll find a way to clear the path.",
+      "ts": 1772200444317
+    },
+    {
+      "role": "user",
+      "content": "hey",
+      "ts": 1772206804060
+    },
+    {
+      "role": "assistant",
+      "content": "The signal is weak... but I'm still here. Keep moving north, Elly.",
+      "ts": 1772206804783
+    }
+  ],
+  "start_time": "2026-02-26T14:50:41.906Z",
+  "phase": "maze",
+  "maze_won": false,
+  "radial_won": false
+}

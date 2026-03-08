@@ -1,0 +1,125 @@
+/* ═══════════════════════════════════════════════════════
+   Project Sunflower — Message 2 Style
+   Luxury Edition • Minimalist Elegance
+═══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: "Cormorant Garamond", serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.m2-phase {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.m2-phase.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ── Happy Birthday ───────────────────── */
+#hb-text {
+    font-size: clamp(32px, 8vw, 72px);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+    animation: elegantEntrance 4s ease-out forwards;
+}
+
+@keyframes elegantEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+        letter-spacing: 0.6em;
+        filter: blur(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: 0.3em;
+        filter: blur(0);
+    }
+}
+
+/* ── Number 21 ────────────────────────── */
+#number-21 {
+    font-size: clamp(80px, 30vw, 280px);
+    font-weight: 300;
+    letter-spacing: -0.05em;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+#number-21.reveal {
+    animation: numberReveal 3s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+@keyframes numberReveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* ── Video / YouTube ──────────────────── */
+#m2-vid {
+    background: #000;
+}
+
+#yt-player {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    /* Prevent clicking/pausing */
+}
+
+@media (min-aspect-ratio: 16/9) {
+    #yt-player {
+        height: 56.25vw;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    #yt-player {
+        width: 177.78vh;
+    }
+}
+
+/* Fade out body */
+body.fade-out {
+    opacity: 0;
+    transition: opacity 2s ease;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Project Sunflower</title>
+  <meta name="description" content="Project Sunflower — a premium birthday experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/sunflower.png">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ═══ PHASE: SPLASH ═══ -->
+  <div id="phase-splash" class="phase active">
+    <!-- Lazy loaded video background -->
+    <video id="splash-video" loop muted playsinline poster="assets/sunflower.png">
+      <source src="assets/rere.mp4" type="video/mp4">
+    </video>
+    <div id="splash-text">SUNFLOWER</div>
+    <div id="splash-hint">↑ SWIPE UP TO START</div>
+  </div>
+
+  <!-- ═══ PHASE: LOGIN ═══ -->
+  <div id="phase-login" class="phase">
+    <div class="login-inner">
+      <h2>AUTHENTICATION</h2>
+      <div class="login-fields">
+        <input id="login-name" class="login-field" type="text" placeholder="IDENTITY" autocomplete="off"
+          spellcheck="false" />
+        <input id="login-pass" class="login-field" type="password" placeholder="KEY" autocomplete="off" />
+      </div>
+      <div id="login-message"></div>
+      <button id="login-btn" class="login-btn">VERIFY</button>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE: INTRO ═══ -->
+  <div id="phase-intro" class="phase">
+    <iframe id="intro-frame" src="about:blank" title="Intro"></iframe>
+  </div>
+
+  <!-- ═══ PHASE: TIMER ═══ -->
+  <div id="phase-timer" class="phase">
+    <div id="timer-label">TIME UNTIL CONVERGENCE</div>
+    <div id="timer-display">00 : 00 : 00 : 00</div>
+  </div>
+
+  <!-- ═══ PHASE: GIFT ═══ -->
+  <div id="phase-gift" class="phase">
+    <button id="gift-btn" title="Unlock">🎁</button>
+  </div>
+
+  <!-- ═══ PHASE: SHELL ═══ -->
+  <div id="phase-shell" class="phase">
+    <iframe id="main-frame" src="about:blank" title="Content"></iframe>
+  </div>
+
+  <!-- ═══ TRANSITION OVERLAY ═══ -->
+  <div id="transition-overlay"></div>
+
+  <!-- ═══ ADMIN SKIP MENU (Hidden by default) ═══ -->
+  <div id="admin-skip-menu" class="hidden">
+    <button class="skip-btn" onclick="adminSkip('intro')">INTRO</button>
+    <button class="skip-btn" onclick="adminSkip('timer')">TIMER</button>
+    <button class="skip-btn" onclick="adminSkip('gift')">GIFT</button>
+    <button class="skip-btn" onclick="adminSkip('message1')">MSG1</button>
+    <button class="skip-btn" onclick="adminSkip('message2')">MSG2</button>
+    <button class="skip-btn" onclick="adminSkip('final')">FINAL</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

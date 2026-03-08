@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Message 1 — Project Sunflower</title>
+    <link type="text/css" rel="stylesheet" href="file/default.css">
+    <script type="text/javascript" src="file/jquery.min.js"></script>
+    <script type="text/javascript" src="file/jscex.min.js"></script>
+    <script type="text/javascript" src="file/jscex-parser.js"></script>
+    <script type="text/javascript" src="file/jscex-jit.js"></script>
+    <script type="text/javascript" src="file/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="file/jscex-async.min.js"></script>
+    <script type="text/javascript" src="file/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="file/function.js" charset="utf-8"></script>
+    <script type="text/javascript" src="file/love.js" charset="utf-8"></script>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            /* Luxury Black */
+            overflow: hidden;
+            color: #fff;
+        }
+
+        #main {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #error {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+
+        #wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        #code {
+            display: none;
+            padding: 20px 30px;
+            font-family: 'Georgia', serif;
+            font-size: 15px;
+            line-height: 2.2;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .say {
+            display: inline;
+        }
+
+        #clock-box {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        canvas.hand {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="error">Please use a modern browser (Chrome, Firefox, Edge)</div>
+        <audio id="myAudio" preload="auto">
+            <source src="aud.mp3" type="audio/mpeg" />
+        </audio>
+        <div id="wrap">
+            <div id="text">
+                <div id="code">
+                    <span class="say">Hey you 💞</span><br>
+                    <span class="say">Happy Birthday 🎈</span><br>
+                    <span class="say">May God bless you 🍀</span><br>
+                    <span class="say">And give u many happiness 💕</span><br>
+                    <span class="say">Just saying... you're pretty awesome ❤️</span><br>
+                    <span class="say">Sending good vibes and maybe a wink 😏</span><br>
+                    <span class="say">Hope u have a great day today ❤️😘</span><br>
+                </div>
+            </div>
+            <div id="clock-box">
+                <span id="clock"></span>
+            </div>
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            if (audio) audio.play().catch(function (e) { console.log("Audio blocked:", e); });
+        }
+
+        (function () {
+            var canvas = $('#canvas');
+
+            if (!canvas[0] || !canvas[0].getContext) {
+                $("#error").show();
+                return false;
+            }
+
+            var width = $(window).width();
+            var height = $(window).height();
+            canvas.attr("width", width);
+            canvas.attr("height", height);
+
+            // Calculate scale based on design resolution (1100x680)
+            var scale = Math.min(width / 1100, height / 680) * 0.9;
+            var offsetX = (width - 1100 * scale) / 2;
+            var offsetY = height - 680 * scale;
+
+            var opts = {
+                seed: {
+                    x: width / 2,
+                    color: "rgb(190, 26, 37)",
+                    scale: 2 * scale
+                },
+                branch: [
+                    [width / 2, height, width / 2, height - 430 * scale, width / 2 - 70 * scale, height - 480 * scale, 30 * scale, 100, [
+                        [width / 2 + 5 * scale, height - 180 * scale, width / 2 - 80 * scale, height - 263 * scale, width / 2 - 195 * scale, height - 280 * scale, 13 * scale, 100, [
+                            [width / 2 - 85 * scale, height - 245 * scale, width / 2 - 101 * scale, height - 150 * scale, width / 2 - 141 * scale, height - 285 * scale, 2 * scale, 40]
+                        ]],
+                        [width / 2 + 15 * scale, height - 235 * scale, width / 2 + 65 * scale, height - 324 * scale, width / 2 + 145 * scale, height - 335 * scale, 12 * scale, 100, [
+                            [width / 2 + 43 * scale, height - 280 * scale, width / 2 + 113 * scale, height - 271 * scale, width / 2 + 126 * scale, height - 254 * scale, 3 * scale, 80]
+                        ]],
+                        [width / 2 + 4 * scale, height - 399 * scale, width / 2 + 2 * scale, height - 432 * scale, width / 2 - 1 * scale, height - 463 * scale, 3 * scale, 40],
+                        [width / 2 + 11 * scale, height - 283 * scale, width / 2 - 122 * scale, height - 433 * scale, width / 2 - 207 * scale, height - 436 * scale, 9 * scale, 80, [
+                            [width / 2 - 108 * scale, height - 394 * scale, width / 2 - 152 * scale, height - 427 * scale, width / 2 - 164 * scale, height - 475 * scale, 2 * scale, 40],
+                            [width / 2 - 37 * scale, height - 335 * scale, width / 2 - 100 * scale, height - 365 * scale, width / 2 - 140 * scale, height - 350 * scale, 4 * scale, 60]
+                        ]],
+                        [width / 2 + 11 * scale, height - 323 * scale, width / 2 + 73 * scale, height - 428 * scale, width / 2 + 143 * scale, height - 459 * scale, 6 * scale, 100, [
+                            [width / 2 + 55 * scale, height - 387 * scale, width / 2 + 111 * scale, height - 403 * scale, width / 2 + 113 * scale, height - 409 * scale, 2 * scale, 80]
+                        ]]
+                    ]]
+                ],
+                bloom: {
+                    num: 700,
+                    width: width,
+                    height: height,
+                },
+                footer: {
+                    width: width,
+                    height: 5,
+                    speed: 10,
+                }
+            };
+
+            var tree = new Tree(canvas[0], width, height, opts);
+            var seed = tree.seed;
+            var foot = tree.footer;
+            var hold = 1;
+
+            canvas.click(function (e) {
+                playAudio();
+                var offset = canvas.offset(), x, y;
+                x = e.pageX - offset.left;
+                y = e.pageY - offset.top;
+                if (seed.hover(x, y)) {
+                    hold = 0;
+                    canvas.unbind("click");
+                    canvas.unbind("mousemove");
+                    canvas.removeClass('hand');
+                }
+            }).mousemove(function (e) {
+                var offset = canvas.offset(), x, y;
+                x = e.pageX - offset.left;
+                y = e.pageY - offset.top;
+                canvas.toggleClass('hand', seed.hover(x, y));
+            });
+
+            var seedAnimate = eval(Jscex.compile("async", function () {
+                seed.draw();
+                while (hold) {
+                    $await(Jscex.Async.sleep(10));
+                }
+                while (seed.canScale()) {
+                    seed.scale(0.95);
+                    $await(Jscex.Async.sleep(10));
+                }
+                while (seed.canMove()) {
+                    seed.move(0, 2);
+                    foot.draw();
+                    $await(Jscex.Async.sleep(10));
+                }
+            }));
+
+            var growAnimate = eval(Jscex.compile("async", function () {
+                do {
+                    tree.grow();
+                    $await(Jscex.Async.sleep(10));
+                } while (tree.canGrow());
+            }));
+
+            var flowAnimate = eval(Jscex.compile("async", function () {
+                do {
+                    tree.flower(2);
+                    $await(Jscex.Async.sleep(10));
+                } while (tree.canFlower());
+            }));
+
+            var moveAnimate = eval(Jscex.compile("async", function () {
+                tree.snapshot("p1", width / 2 - 150 * scale, 0, 610 * scale, height);
+                while (tree.move("p1", width / 2 + 50 * scale, 0)) {
+                    foot.draw();
+                    $await(Jscex.Async.sleep(10));
+                }
+                foot.draw();
+                tree.snapshot("p2", width / 2 + 50 * scale, 0, 610 * scale, height);
+
+                canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+                canvas.css("background", "#000"); // FIXED: Was #ffe
+                $await(Jscex.Async.sleep(300));
+                canvas.css("background", "none");
+            }));
+
+            var textAnimate = eval(Jscex.compile("async", function () {
+                $("#code").show().typewriter();
+            }));
+
+            var runAsync = eval(Jscex.compile("async", function () {
+                $await(seedAnimate());
+                $await(growAnimate());
+                $await(flowAnimate());
+                $await(moveAnimate());
+                textAnimate().start();
+            }));
+
+            runAsync().start();
+
+            // Increased timeout to ensure full typewriter effect finish before signaling
+            setTimeout(function () {
+                window.parent.postMessage({ type: 'm1-finished' }, '*');
+            }, 45000);
+        })();
+    </script>
+</body>
+
+</html>

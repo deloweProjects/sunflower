@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Intro - Project Sunflower</title>
+    <link rel="stylesheet" href="intro.css">
+</head>
+
+<body>
+    <!-- Phase: Sunflower Symbol (Tap) -->
+    <div id="intro-tap-container" class="intro-phase active">
+        <div id="sunflower-zoom-container">
+            <img id="sunflower-img" src="assets/sunflower.png" alt="Sunflower" draggable="false">
+        </div>
+
+        <div id="sunflower-label">
+            <span id="label-prefix"></span><span id="label-main">SUNFLOWER</span>
+        </div>
+        <div id="tap-hint">tap three times</div>
+    </div>
+
+    <!-- Phase: Cinematic Intro (text) -->
+    <div id="intro-cinematic-container" class="intro-phase">
+        <div id="intro-text"></div>
+    </div>
+
+    <!-- Flash Overlay -->
+    <div id="intro-flash"></div>
+
+    <!-- Scanline -->
+    <div class="intro-scanline"></div>
+
+    <audio id="intro-audio" preload="auto"></audio>
+
+    <script src="intro.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{
+  "session_id": "421e088c-a39d-45a7-86dd-86ba3eef6887",
+  "player_id": "alpha",
+  "is_admin": true,
+  "bond_state": {
+    "trust": 50,
+    "aggression": 0,
+    "resentment": 10,
+    "dependency": 0
+  },
+  "emotional_state": "observing",
+  "checkpoint": 0,
+  "progress_percent": 0,
+  "entity_states": {
+    "darks": [],
+    "gemma_active": true,
+    "ziah_active": false
+  },
+  "dialogue_history": [
+    {
+      "role": "user",
+      "content": "hey",
+      "ts": 1772211667800
+    },
+    {
+      "role": "assistant",
+      "content": "System interference detect...ed. Don't stop now, we're close.",
+      "ts": 1772211668519
+    }
+  ],
+  "start_time": "2026-02-27T11:55:10.217Z",
+  "phase": "maze",
+  "maze_won": false,
+  "radial_won": false
+}
