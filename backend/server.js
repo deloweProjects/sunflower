@@ -10,8 +10,15 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
 app.use(cors({
-  origin: allowedOrigin,
-  methods: ['GET', 'POST'],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl) 
+    // or if it matches our allowed origin / wildcard
+    if (!origin || allowedOrigin === '*' || origin === allowedOrigin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
