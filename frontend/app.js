@@ -3,6 +3,14 @@
 ═══════════════════════════════════════════════════════ */
 
 const API_BASE_URL = window.CONFIG ? window.CONFIG.API_BASE_URL : '';
+
+if (!API_BASE_URL) {
+    console.warn("⚠️ API_BASE_URL is not set. Local testing defaults will be used.");
+} else if (window.location.hostname !== 'localhost' && API_BASE_URL.includes('localhost')) {
+    console.error("❌ CRITICAL: Your live site is trying to connect to a local backend. Update config.js with your Render URL!");
+} else {
+    console.log(`✅ API Connection: ${API_BASE_URL}`);
+}
 // ── Configuration ──────────────────────────
 // No hardcoded target date here — we fetch from the server for precision and security.
 
