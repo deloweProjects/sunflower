@@ -19,17 +19,14 @@ app.use(express.json());
 // Health Check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date() }));
 
-// Serve frontend statically
-app.use(express.static(path.join(__dirname, '..', 'frontend')));
-
-// Routes (only auth + system)
+// Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/system', require('./routes/system'));
 app.use('/api/timer', require('./routes/timer'));
 
-// Fallback: serve index.html for SPA
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
+// Only a base landing to show API is alive
+app.get('/', (req, res) => {
+  res.json({ message: "Sunflower API Active", status: "ok" });
 });
 
 // Error handler
