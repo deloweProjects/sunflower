@@ -48,8 +48,18 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 // ── API helpers ───────────────────────────
 async function apiPost(path, body) {
     try {
-        console.log(`[API] POST ${path}`, body);
-        const r = await fetch(API_BASE_URL + path, {
+        // Fix: Ensure we don't end up with double slashes //
+        let url = API_BASE_URL;
+        if (url) {
+            if (url.endsWith('/')) url = url.slice(0, -1);
+            if (path.startsWith('/')) path = path.slice(1);
+            url = url + '/' + path;
+        } else {
+            url = path;
+        }
+
+        console.log(`[API] POST ${url}`, body);
+        const r = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -59,7 +69,7 @@ async function apiPost(path, body) {
         return data;
     } catch (e) {
         console.error(`[API] ERROR`, e);
-        return {};
+        return { status: 'error', message: 'Connection Failed' };
     }
 }
 
