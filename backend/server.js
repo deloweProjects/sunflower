@@ -23,17 +23,17 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Health Check
-app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date() }));
+// Health Check (Generic)
+app.get('/api/status', (req, res) => res.json({ status: 'active', timestamp: Date.now() }));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/system', require('./routes/system'));
 app.use('/api/timer', require('./routes/timer'));
 
-// Only a base landing to show API is alive
+// Default 404 for root
 app.get('/', (req, res) => {
-  res.json({ message: "Sunflower API Active", status: "ok" });
+  res.status(404).json({ error: "Endpoint not found" });
 });
 
 // Error handler
@@ -43,5 +43,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n🌻 Project Sunflower backend running at http://localhost:${PORT}\n`);
+  console.log(`\nReady on port ${PORT}\n`);
 });
