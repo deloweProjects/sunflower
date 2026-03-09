@@ -43,7 +43,8 @@ const ids = [
     'phase-gift', 'phase-shell', 'main-frame', 'intro-frame',
     'splash-text', 'splash-hint', 'splash-video',
     'login-name', 'login-pass', 'login-btn', 'login-message',
-    'timer-display', 'transition-overlay', 'admin-skip-menu', 'gift-btn'
+    'timer-display', 'transition-overlay', 'admin-skip-menu', 'gift-btn',
+    'shell-next-btn'
 ];
 ids.forEach(id => { EL[id] = document.getElementById(id); });
 
@@ -89,12 +90,15 @@ function showPhase(name) {
 
     switch (name) {
         case 'splash':
+            hideNextButton();
             EL['phase-splash']?.classList.add('active');
             break;
         case 'login':
+            hideNextButton();
             EL['phase-login']?.classList.add('slide-up', 'active');
             break;
         case 'intro':
+            hideNextButton();
             EL['phase-splash']?.classList.remove('active');
             EL['phase-login']?.classList.remove('slide-up');
             EL['phase-intro']?.classList.add('active');
@@ -106,25 +110,49 @@ function showPhase(name) {
             startCountdown();
             break;
         case 'gift':
+            hideNextButton();
             EL['phase-timer']?.classList.remove('active');
             EL['phase-gift']?.classList.add('active');
             break;
         case 'message1':
+            hideNextButton();
             EL['phase-gift']?.classList.remove('active');
             EL['phase-shell']?.classList.add('active');
             EL['main-frame'].src = 'message-1/index.html';
             break;
         case 'message2':
             console.log(`[Phase] Switching to ${name}`);
+            hideNextButton();
             EL['phase-shell']?.classList.add('active');
             EL['main-frame'].src = 'message-2/index.html';
             break;
         case 'final':
             console.log(`[Phase] Switching to ${name}`);
+            hideNextButton();
             EL['phase-shell']?.classList.add('active');
             EL['main-frame'].src = 'finalweb/index.html';
             break;
     }
+}
+
+function showNextButton(targetPhase) {
+    if (!EL['shell-next-btn']) return;
+    EL['shell-next-btn'].onclick = () => transitionTo(targetPhase);
+    EL['shell-next-btn'].classList.remove('hidden');
+    // Ensure styles are applied for fade-in
+    requestAnimationFrame(() => {
+        EL['shell-next-btn'].classList.add('visible');
+    });
+}
+
+function hideNextButton() {
+    if (!EL['shell-next-btn']) return;
+    EL['shell-next-btn'].classList.remove('visible');
+    setTimeout(() => {
+        if (!EL['shell-next-btn'].classList.contains('visible')) {
+            EL['shell-next-btn'].classList.add('hidden');
+        }
+    }, 1500);
 }
 
 async function transitionTo(phase) {
@@ -324,11 +352,13 @@ window.addEventListener('message', async (e) => {
     const msg = e.data;
     if (msg === 'intro-finished' || msg.type === 'intro-finished') transitionTo('timer');
     if (msg === 'm1-finished' || msg.type === 'm1-finished') {
-        console.log('[Message 1] Finished. Waiting before Phase 2...');
-        await sleep(5000); // 5 second luxury buffer as requested
-        showPhase('message2');
+        console.log('[Message 1] Finished. Showing navigation controls...');
+        showNextButton('message2');
     }
-    if (msg === 'm2-finished' || msg.type === 'm2-finished') transitionTo('final');
+    if (msg === 'm2-finished' || msg.type === 'm2-finished') {
+        console.log('[Message 2] Finished. Showing navigation controls...');
+        showNextButton('final');
+    }
 
     if (msg === 'replay-intro') showPhase('intro');
     if (msg === 'replay-msg1') showPhase('message1');
