@@ -21,12 +21,12 @@ window.onYouTubeIframeAPIReady = () => {
         videoId: 'Oby_Axy6eBA',
         playerVars: {
             'autoplay': 1,
-            'controls': 0,
+            'controls': 1,
             'rel': 0,
             'showinfo': 0,
             'modestbranding': 1,
             'loop': 0,
-            'fs': 0,
+            'fs': 1,
             'cc_load_policy': 0,
             'iv_load_policy': 3,
             'autohide': 0,
@@ -39,7 +39,8 @@ window.onYouTubeIframeAPIReady = () => {
             },
             'onStateChange': (event) => {
                 if (event.data == YT.PlayerState.ENDED) {
-                    finishSequence();
+                    console.log("[YouTube] Video ended");
+                    window.parent.postMessage({ type: 'm2-finished' }, '*');
                 }
             }
         }
@@ -93,10 +94,8 @@ async function startSequence() {
 }
 
 async function finishSequence() {
-    await sleep(1000);
-    document.body.classList.add('fade-out');
-    await sleep(2000);
-    window.parent.postMessage({ type: 'm2-finished' }, '*');
+    // No longer auto-triggering finish from here
+    console.log("[Message 2] Sequence waiting for user interaction via shell next btn");
 }
 
 // Start sequence on load
