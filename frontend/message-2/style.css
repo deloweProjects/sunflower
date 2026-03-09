@@ -102,8 +102,7 @@ body {
     width: 100vw;
     height: 100vh;
     transform: translate(-50%, -50%);
-    pointer-events: none;
-    /* Prevent clicking/pausing */
+    /* Allowed interaction with controls */
 }
 
 @media (min-aspect-ratio: 16/9) {
