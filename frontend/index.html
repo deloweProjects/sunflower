@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>delowe</title>
+<meta name="description" content="Welcome. I'm delowe. I build apps and tools. Projects: Linc.">
+<meta name="theme-color" content="#0a110a">
+<link rel="icon" href="linc/linc-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#f1f5ea;--soft:#a3a99a;--dim:#6f7664;--line:rgba(255,255,255,.1);--glass:rgba(24,38,22,.5);--acc:#cfe0a0}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;color:var(--ink);font:18px/1.6 "Space Grotesk","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+       background:#0a110a url(linc/img/wallpaper.webp) center/cover fixed no-repeat;display:flex;flex-direction:column}
+  body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,rgba(8,14,8,.4),rgba(8,14,8,.78));z-index:-1}
+  main{flex:1;width:100%;max-width:640px;margin:0 auto;padding:12vh 24px 40px;display:flex;flex-direction:column;justify-content:center}
+  .mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+  .tag{color:var(--soft);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 18px}
+  h1{font-size:clamp(46px,9vw,84px);letter-spacing:-.05em;line-height:1;margin:0 0 22px;font-weight:600}
+  h1 span{background:linear-gradient(100deg,#f1f6e2,#9db56d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--soft);margin:0 0 56px;max-width:460px}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:500;margin:0 0 14px}
+  .proj{display:flex;align-items:center;gap:18px;padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:var(--glass);
+        -webkit-backdrop-filter:blur(20px) saturate(1.35);backdrop-filter:blur(20px) saturate(1.35);text-decoration:none;color:inherit;
+        transition:transform .2s,border-color .2s,background .2s}
+  .proj:hover{transform:translateY(-3px);border-color:rgba(207,224,160,.45);background:rgba(34,52,30,.6)}
+  .proj img{width:52px;height:52px;border-radius:14px;flex:none}
+  .proj b{display:block;font-size:20px;letter-spacing:-.02em}
+  .proj small{display:block;color:var(--soft);font-size:15px}
+  .arrow{margin-left:auto;color:var(--acc);font-size:22px;transition:transform .2s}
+  .proj:hover .arrow{transform:translateX(5px)}
+  footer{padding:24px;text-align:center;color:var(--dim);font-size:13px}
+  footer a{color:var(--soft);text-decoration:none}footer a:hover{color:var(--ink)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <p class="tag mono">delowe</p>
+  <h1>Welcome<span>.</span></h1>
+  <p class="lead">I'm delowe. I build apps and tools, mostly for Android and Windows. Here is some of what I've made.</p>
+  <h2 class="mono">Projects</h2>
+  <a class="proj" href="https://linc.sunflower.co.zw">
+    <img src="linc/linc-icon.png" alt="" width="52" height="52">
+    <span><b>Linc</b><small>Your Android phone on your Windows PC. Free.</small></span>
+    <span class="arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</main>
+<footer class="mono"><a href="https://github.com/deloweProjects">github.com/deloweProjects</a></footer>
+</body>
+</html>

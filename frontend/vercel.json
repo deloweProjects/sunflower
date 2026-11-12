@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "src": "^/$", "has": [{ "type": "host", "value": "linc.sunflower.co.zw" }], "dest": "/linc/index.html" },
+    { "src": "^/(?!linc/)(.*)$", "has": [{ "type": "host", "value": "linc.sunflower.co.zw" }], "dest": "/linc/$1" },
+    { "handle": "filesystem" }
+  ]
+}

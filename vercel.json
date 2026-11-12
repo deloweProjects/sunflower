@@ -1,6 +1,11 @@
 {
-  "cleanUrls": true,
-  "headers": [
-    { "source": "/img/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
+  "framework": null,
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "frontend",
+  "routes": [
+    { "src": "^/$", "has": [{ "type": "host", "value": "linc.sunflower.co.zw" }], "dest": "/linc/index.html" },
+    { "src": "^/(?!linc/)(.*)$", "has": [{ "type": "host", "value": "linc.sunflower.co.zw" }], "dest": "/linc/$1" },
+    { "handle": "filesystem" }
   ]
 }
