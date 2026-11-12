@@ -3,52 +3,112 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>delowe</title>
-<meta name="description" content="Welcome. I'm delowe. I build apps and tools. Projects: Linc.">
-<meta name="theme-color" content="#0a110a">
-<link rel="icon" href="linc/linc-icon.png">
+<meta name="color-scheme" content="light dark">
+<title>Sunflower</title>
+<meta name="description" content="Welcome to Sunflower. delowe projects.">
+<meta name="theme-color" content="#fff6df" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0a12" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 20 20'%3E%3Ccircle r='9' fill='%23ffb400'/%3E%3Ccircle r='4.2' fill='%234a2a12'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,144,600;1,144,800&amp;display=swap&amp;text=sunflowerWelcometoSnfldeprjcts%20.%40%C2%B7">
 <style>
-  :root{--ink:#f1f5ea;--soft:#a3a99a;--dim:#6f7664;--line:rgba(255,255,255,.1);--glass:rgba(24,38,22,.5);--acc:#cfe0a0}
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;color:var(--ink);font:18px/1.6 "Space Grotesk","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
-       background:#0a110a url(linc/img/wallpaper.webp) center/cover fixed no-repeat;display:flex;flex-direction:column}
-  body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,rgba(8,14,8,.4),rgba(8,14,8,.78));z-index:-1}
-  main{flex:1;width:100%;max-width:640px;margin:0 auto;padding:12vh 24px 40px;display:flex;flex-direction:column;justify-content:center}
-  .mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
-  .tag{color:var(--soft);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 18px}
-  h1{font-size:clamp(46px,9vw,84px);letter-spacing:-.05em;line-height:1;margin:0 0 22px;font-weight:600}
-  h1 span{background:linear-gradient(100deg,#f1f6e2,#9db56d);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{color:var(--soft);margin:0 0 56px;max-width:460px}
-  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:500;margin:0 0 14px}
-  .proj{display:flex;align-items:center;gap:18px;padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:var(--glass);
-        -webkit-backdrop-filter:blur(20px) saturate(1.35);backdrop-filter:blur(20px) saturate(1.35);text-decoration:none;color:inherit;
-        transition:transform .2s,border-color .2s,background .2s}
-  .proj:hover{transform:translateY(-3px);border-color:rgba(207,224,160,.45);background:rgba(34,52,30,.6)}
-  .proj img{width:52px;height:52px;border-radius:14px;flex:none}
-  .proj b{display:block;font-size:20px;letter-spacing:-.02em}
-  .proj small{display:block;color:var(--soft);font-size:15px}
-  .arrow{margin-left:auto;color:var(--acc);font-size:22px;transition:transform .2s}
-  .proj:hover .arrow{transform:translateX(5px)}
-  footer{padding:24px;text-align:center;color:var(--dim);font-size:13px}
-  footer a{color:var(--soft);text-decoration:none}footer a:hover{color:var(--ink)}
-  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:root{color-scheme:light dark;
+  --bg:#fff6df;--bg2:#ffe9b8;--ink:#2b1a08;--soft:#7a5f3a;--card:rgba(255,255,255,.62);--line:rgba(120,80,10,.16);
+  --glow1:rgba(255,196,0,.55);--glow2:rgba(255,92,138,.32);--glow3:rgba(255,138,40,.40);--letters:.20;--shadow:0 20px 50px -22px rgba(150,90,0,.45)}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e0a12;--bg2:#1a1020;--ink:#fff6e0;--soft:#c8b8a6;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.13);
+  --glow1:rgba(255,190,0,.36);--glow2:rgba(255,61,129,.30);--glow3:rgba(124,92,255,.28);--letters:.14;--shadow:0 24px 60px -24px #000}}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100svh}
+.serif{font-family:"Fraunces",Georgia,"Times New Roman",serif;font-style:italic}
+
+/* ambient colour */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform;opacity:0;animation:fade 2.4s .1s forwards}
+.b1{width:46vmax;height:46vmax;left:-12vmax;top:-14vmax;background:radial-gradient(closest-side,var(--glow1),transparent);animation:fade 2.4s .1s forwards,drift1 22s ease-in-out infinite alternate}
+.b2{width:40vmax;height:40vmax;right:-12vmax;top:18vh;background:radial-gradient(closest-side,var(--glow2),transparent);animation:fade 2.4s .4s forwards,drift2 26s ease-in-out infinite alternate}
+.b3{width:44vmax;height:44vmax;left:18vw;bottom:-22vmax;background:radial-gradient(closest-side,var(--glow3),transparent);animation:fade 2.4s .7s forwards,drift1 30s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(6vmax,4vmax) scale(1.12)}}
+@keyframes drift2{to{transform:translate(-7vmax,-3vmax) scale(.92)}}
+@keyframes fade{to{opacity:1}}
+
+/* the big background word */
+.word{position:fixed;inset:0;z-index:1;display:grid;place-items:center;pointer-events:none;user-select:none}
+.word p{font-size:min(18.5vw,52vh);line-height:.9;font-weight:800;letter-spacing:-.04em;white-space:nowrap;opacity:var(--letters);transform:translateY(-2vh)}
+.word span{display:inline-block;padding:0 .02em;background-image:linear-gradient(95deg,#ffc400 0%,#ff7a1a 48%,#ff3d81 100%);background-size:900% 100%;background-position:calc(var(--i)*12.5%) 0;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(40px);filter:blur(14px);animation:letter 1.5s calc(.15s + var(--i)*.09s) cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+
+/* foreground */
+main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:clamp(20px,5vh,44px) 22px clamp(22px,5vh,40px);text-align:center}
+.top{display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.2vh,22px);margin-top:clamp(0px,4vh,40px)}
+.sun{width:clamp(130px,26vmin,230px);height:auto;filter:drop-shadow(0 18px 30px rgba(255,150,0,.35));opacity:0;transform:scale(.6) rotate(-40deg);animation:bloom 1.8s .2s cubic-bezier(.2,.8,.2,1) forwards}
+.ring.b{animation:spin 70s linear infinite;transform-origin:0 0}
+.ring.f{animation:spin 90s linear infinite reverse;transform-origin:0 0}
+.seeds{animation:spin 160s linear infinite;transform-origin:0 0}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bloom{to{opacity:1;transform:none}}
+h1{font-size:clamp(30px,5.6vw,54px);line-height:1.05;font-weight:600;letter-spacing:-.02em}
+h1 b{font-weight:800;background:linear-gradient(95deg,#ffb400,#ff6a2a 55%,#ff3d81);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.mid{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.label{font-size:clamp(20px,3vw,26px);color:var(--soft)}
+.card{display:flex;align-items:center;gap:16px;width:min(100%,380px);padding:14px 18px 14px 14px;border-radius:22px;border:1px solid var(--line);background:var(--card);
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:var(--shadow);color:inherit;text-decoration:none;text-align:left;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,200,60,.28),transparent 70%);transform:translateX(-120%);transition:transform .8s}
+.card:hover{transform:translateY(-5px) scale(1.015);border-color:rgba(255,140,40,.55)}
+.card:hover:before{transform:translateX(120%)}
+.card img{width:54px;height:54px;border-radius:15px;flex:none;box-shadow:0 8px 18px -6px rgba(0,0,0,.4)}
+.card b{display:block;font-size:21px;letter-spacing:-.02em}
+.card small{display:block;color:var(--soft);font-size:14px}
+.arrow{margin-left:auto;font-size:24px;color:#ff7a1a;transition:transform .3s}
+.card:hover .arrow{transform:translateX(6px)}
+
+.mail{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:99px;text-decoration:none;font-weight:600;font-size:16px;color:#2b1a08;
+  background:linear-gradient(95deg,#ffd23f,#ff9a1f 60%,#ff6a4a);box-shadow:0 12px 30px -10px rgba(255,120,20,.65);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.mail:hover{transform:translateY(-3px);box-shadow:0 18px 38px -10px rgba(255,100,40,.8)}
+.mail svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* staggered fade-in */
+.rise{opacity:0;transform:translateY(26px);filter:blur(8px);animation:rise 1.2s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none;filter:none}}
+@media (max-width:520px){.word p{font-size:19.5vw}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important}.ring,.seeds,.blob{animation:none!important}}
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i></div>
+<div class="word serif" aria-hidden="true"><p><span style="--i:0">s</span><span style="--i:1">u</span><span style="--i:2">n</span><span style="--i:3">f</span><span style="--i:4">l</span><span style="--i:5">o</span><span style="--i:6">w</span><span style="--i:7">e</span><span style="--i:8">r</span></p></div>
 <main>
-  <p class="tag mono">delowe</p>
-  <h1>Welcome<span>.</span></h1>
-  <p class="lead">I'm delowe. I build apps and tools, mostly for Android and Windows. Here is some of what I've made.</p>
-  <h2 class="mono">Projects</h2>
-  <a class="proj" href="https://linc.sunflower.co.zw">
-    <img src="linc/linc-icon.png" alt="" width="52" height="52">
-    <span><b>Linc</b><small>Your Android phone on your Windows PC. Free.</small></span>
-    <span class="arrow" aria-hidden="true">&rarr;</span>
+  <div class="top">
+    <svg class="sun" viewBox="-104 -104 208 208" aria-hidden="true">
+<defs>
+<path id="p" d="M0,-30C15,-52 13,-90 0,-99C-13,-90 -15,-52 0,-30Z"/>
+<linearGradient id="gb" x1="0" y1="-1" x2="0" y2="1"><stop offset="0" stop-color="#ff9a1f"/><stop offset="1" stop-color="#ff5a36"/></linearGradient>
+<linearGradient id="gf" x1="0" y1="-1" x2="0" y2="1"><stop offset="0" stop-color="#ffe45c"/><stop offset="1" stop-color="#ffb400"/></linearGradient>
+<radialGradient id="gc" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7a4a1d"/><stop offset=".6" stop-color="#4a2a12"/><stop offset="1" stop-color="#2b1608"/></radialGradient>
+</defs>
+<g class="ring b" fill="url(#gb)"><use href="#p" transform="rotate(0.0)"/><use href="#p" transform="rotate(22.5)"/><use href="#p" transform="rotate(45.0)"/><use href="#p" transform="rotate(67.5)"/><use href="#p" transform="rotate(90.0)"/><use href="#p" transform="rotate(112.5)"/><use href="#p" transform="rotate(135.0)"/><use href="#p" transform="rotate(157.5)"/><use href="#p" transform="rotate(180.0)"/><use href="#p" transform="rotate(202.5)"/><use href="#p" transform="rotate(225.0)"/><use href="#p" transform="rotate(247.5)"/><use href="#p" transform="rotate(270.0)"/><use href="#p" transform="rotate(292.5)"/><use href="#p" transform="rotate(315.0)"/><use href="#p" transform="rotate(337.5)"/></g>
+<g class="ring f" fill="url(#gf)"><use href="#p" transform="rotate(11.25) scale(.9)"/><use href="#p" transform="rotate(33.75) scale(.9)"/><use href="#p" transform="rotate(56.25) scale(.9)"/><use href="#p" transform="rotate(78.75) scale(.9)"/><use href="#p" transform="rotate(101.25) scale(.9)"/><use href="#p" transform="rotate(123.75) scale(.9)"/><use href="#p" transform="rotate(146.25) scale(.9)"/><use href="#p" transform="rotate(168.75) scale(.9)"/><use href="#p" transform="rotate(191.25) scale(.9)"/><use href="#p" transform="rotate(213.75) scale(.9)"/><use href="#p" transform="rotate(236.25) scale(.9)"/><use href="#p" transform="rotate(258.75) scale(.9)"/><use href="#p" transform="rotate(281.25) scale(.9)"/><use href="#p" transform="rotate(303.75) scale(.9)"/><use href="#p" transform="rotate(326.25) scale(.9)"/><use href="#p" transform="rotate(348.75) scale(.9)"/></g>
+<circle r="36" fill="url(#gc)"/>
+<g class="seeds" fill="#ffcf6a" opacity=".85"><circle cx="-1.6" cy="1.5" r="0.90"/><circle cx="0.3" cy="-3.1" r="0.91"/><circle cx="2.3" cy="3.0" r="0.91"/><circle cx="-4.3" cy="-0.8" r="0.92"/><circle cx="4.2" cy="-2.6" r="0.92"/><circle cx="-1.4" cy="5.2" r="0.92"/><circle cx="-2.7" cy="-5.2" r="0.93"/><circle cx="5.8" cy="2.1" r="0.93"/><circle cx="-6.1" cy="2.5" r="0.94"/><circle cx="2.9" cy="-6.3" r="0.94"/><circle cx="2.2" cy="7.0" r="0.94"/><circle cx="-6.6" cy="-3.8" r="0.95"/><circle cx="7.7" cy="-1.7" r="0.95"/><circle cx="-4.7" cy="6.7" r="0.95"/><circle cx="-1.1" cy="-8.4" r="0.96"/><circle cx="6.7" cy="5.7" r="0.96"/><circle cx="-9.1" cy="0.4" r="0.97"/><circle cx="6.6" cy="-6.6" r="0.97"/><circle cx="-0.4" cy="9.6" r="0.97"/><circle cx="-6.3" cy="-7.6" r="0.98"/><circle cx="10.0" cy="1.3" r="0.98"/><circle cx="-8.5" cy="5.9" r="0.99"/><circle cx="2.3" cy="-10.3" r="0.99"/><circle cx="5.4" cy="9.4" r="0.99"/><circle cx="-10.5" cy="-3.3" r="1.00"/><circle cx="10.2" cy="-4.7" r="1.00"/><circle cx="-4.4" cy="10.5" r="1.01"/><circle cx="-3.9" cy="-11.0" r="1.01"/><circle cx="10.5" cy="5.5" r="1.01"/><circle cx="-11.7" cy="3.1" r="1.02"/><circle cx="6.6" cy="-10.3" r="1.02"/><circle cx="2.1" cy="12.3" r="1.03"/><circle cx="-10.0" cy="-7.7" r="1.03"/><circle cx="12.8" cy="-1.1" r="1.03"/><circle cx="-8.8" cy="9.6" r="1.04"/><circle cx="0.1" cy="-13.2" r="1.04"/><circle cx="9.0" cy="9.9" r="1.04"/><circle cx="-13.5" cy="-1.3" r="1.05"/><circle cx="10.9" cy="-8.3" r="1.05"/><circle cx="-2.5" cy="13.7" r="1.06"/><circle cx="-7.5" cy="-11.9" r="1.06"/><circle cx="13.8" cy="3.8" r="1.06"/><circle cx="-12.8" cy="6.6" r="1.07"/><circle cx="5.1" cy="-13.7" r="1.07"/><circle cx="5.6" cy="13.7" r="1.08"/><circle cx="-13.5" cy="-6.4" r="1.08"/><circle cx="14.4" cy="-4.4" r="1.08"/><circle cx="-7.7" cy="13.2" r="1.09"/><circle cx="-3.2" cy="-15.1" r="1.09"/><circle cx="12.7" cy="9.0" r="1.10"/><circle cx="-15.6" cy="1.9" r="1.10"/><circle cx="10.3" cy="-12.1" r="1.10"/><circle cx="0.6" cy="16.0" r="1.11"/><circle cx="-11.3" cy="-11.5" r="1.11"/><circle cx="16.3" cy="0.8" r="1.12"/><circle cx="-12.7" cy="10.5" r="1.12"/><circle cx="2.3" cy="-16.5" r="1.12"/><circle cx="9.5" cy="13.8" r="1.13"/><circle cx="-16.5" cy="-3.8" r="1.13"/><circle cx="14.8" cy="-8.4" r="1.13"/><circle cx="-5.3" cy="16.3" r="1.14"/><circle cx="-7.2" cy="-15.8" r="1.14"/><circle cx="16.1" cy="6.8" r="1.15"/><circle cx="-16.6" cy="5.9" r="1.15"/><circle cx="8.3" cy="-15.7" r="1.15"/><circle cx="4.5" cy="17.3" r="1.16"/><circle cx="-15.1" cy="-9.8" r="1.16"/><circle cx="17.9" cy="-3.0" r="1.17"/><circle cx="-11.3" cy="14.4" r="1.17"/><circle cx="-1.4" cy="-18.4" r="1.17"/><circle cx="13.5" cy="12.7" r="1.18"/><circle cx="-18.7" cy="-0.2" r="1.18"/><circle cx="14.0" cy="-12.6" r="1.19"/><circle cx="-1.8" cy="18.8" r="1.19"/><circle cx="-11.4" cy="-15.2" r="1.19"/><circle cx="18.9" cy="3.5" r="1.20"/><circle cx="-16.4" cy="10.2" r="1.20"/><circle cx="5.2" cy="-18.7" r="1.21"/><circle cx="8.8" cy="17.4" r="1.21"/><circle cx="-18.4" cy="-6.9" r="1.21"/><circle cx="18.4" cy="-7.4" r="1.22"/><circle cx="-8.6" cy="18.0" r="1.22"/><circle cx="-5.8" cy="-19.2" r="1.22"/><circle cx="17.3" cy="10.3" r="1.23"/><circle cx="-19.9" cy="4.2" r="1.23"/><circle cx="11.9" cy="-16.6" r="1.24"/><circle cx="2.4" cy="20.4" r="1.24"/><circle cx="-15.7" cy="-13.5" r="1.24"/><circle cx="20.7" cy="-0.7" r="1.25"/><circle cx="-14.9" cy="14.6" r="1.25"/><circle cx="1.2" cy="-21.0" r="1.26"/><circle cx="13.4" cy="16.3" r="1.26"/><circle cx="-21.0" cy="-3.0" r="1.26"/><circle cx="17.6" cy="-12.0" r="1.27"/><circle cx="-4.9" cy="20.9" r="1.27"/><circle cx="-10.5" cy="-18.8" r="1.28"/><circle cx="20.6" cy="6.8" r="1.28"/><circle cx="-19.9" cy="8.9" r="1.28"/><circle cx="8.6" cy="-20.1" r="1.29"/><circle cx="7.2" cy="20.8" r="1.29"/><circle cx="-19.5" cy="-10.5" r="1.30"/><circle cx="21.5" cy="-5.5" r="1.30"/><circle cx="-12.3" cy="18.7" r="1.30"/><circle cx="-3.6" cy="-22.1" r="1.31"/><circle cx="17.7" cy="14.0" r="1.31"/><circle cx="-22.6" cy="1.6" r="1.31"/><circle cx="15.6" cy="-16.6" r="1.32"/><circle cx="-0.3" cy="22.9" r="1.32"/><circle cx="-15.3" cy="-17.2" r="1.33"/><circle cx="23.0" cy="2.4" r="1.33"/><circle cx="-18.6" cy="13.8" r="1.33"/><circle cx="4.4" cy="-22.9" r="1.34"/><circle cx="12.3" cy="19.9" r="1.34"/><circle cx="-22.6" cy="-6.4" r="1.35"/><circle cx="21.1" cy="-10.6" r="1.35"/><circle cx="-8.5" cy="22.1" r="1.35"/><circle cx="-8.8" cy="-22.1" r="1.36"/><circle cx="21.5" cy="10.4" r="1.36"/><circle cx="-23.0" cy="6.8" r="1.37"/><circle cx="12.4" cy="-20.7" r="1.37"/><circle cx="4.8" cy="23.7" r="1.37"/><circle cx="-19.7" cy="-14.3" r="1.38"/><circle cx="24.2" cy="-2.8" r="1.38"/><circle cx="-16.1" cy="18.5" r="1.39"/><circle cx="-0.7" cy="-24.6" r="1.39"/><circle cx="17.2" cy="17.8" r="1.39"/><circle cx="-24.7" cy="-1.5" r="1.40"/><circle cx="19.3" cy="-15.7" r="1.40"/><circle cx="-3.7" cy="24.7" r="1.40"/><circle cx="-14.0" cy="-20.8" r="1.41"/><circle cx="24.5" cy="5.9" r="1.41"/><circle cx="-22.1" cy="12.2" r="1.42"/><circle cx="8.1" cy="-24.1" r="1.42"/><circle cx="10.3" cy="23.3" r="1.42"/><circle cx="-23.4" cy="-10.2" r="1.43"/><circle cx="24.3" cy="-8.3" r="1.43"/><circle cx="-12.3" cy="22.6" r="1.44"/><circle cx="-6.2" cy="-25.1" r="1.44"/><circle cx="21.6" cy="14.3" r="1.44"/><circle cx="-25.7" cy="4.0" r="1.45"/><circle cx="16.3" cy="-20.4" r="1.45"/><circle cx="1.8" cy="26.2" r="1.46"/><circle cx="-19.0" cy="-18.1" r="1.46"/><circle cx="26.4" cy="0.5" r="1.46"/><circle cx="-19.9" cy="17.5" r="1.47"/><circle cx="2.8" cy="-26.4" r="1.47"/><circle cx="15.8" cy="21.5" r="1.48"/><circle cx="-26.3" cy="-5.2" r="1.48"/><circle cx="22.9" cy="-14.0" r="1.48"/><circle cx="-7.5" cy="25.9" r="1.49"/><circle cx="-12.0" cy="-24.2" r="1.49"/><circle cx="25.3" cy="9.8" r="1.49"/><circle cx="-25.4" cy="9.9" r="1.50"/><circle cx="12.1" cy="-24.5" r="1.50"/><circle cx="7.7" cy="26.3" r="1.51"/><circle cx="-23.5" cy="-14.2" r="1.51"/><circle cx="27.0" cy="-5.4" r="1.51"/><circle cx="-16.3" cy="22.3" r="1.52"/><circle cx="-3.0" cy="-27.6" r="1.52"/><circle cx="20.9" cy="18.3" r="1.53"/><circle cx="-27.9" cy="0.6" r="1.53"/><circle cx="20.2" cy="-19.4" r="1.53"/><circle cx="-1.8" cy="28.0" r="1.54"/><circle cx="-17.6" cy="-22.0" r="1.54"/><circle cx="27.9" cy="4.3" r="1.55"/><circle cx="-23.6" cy="15.7" r="1.55"/><circle cx="6.8" cy="-27.6" r="1.55"/><circle cx="13.7" cy="25.0" r="1.56"/><circle cx="-27.1" cy="-9.2" r="1.56"/><circle cx="26.3" cy="-11.5" r="1.57"/><circle cx="-11.6" cy="26.3" r="1.57"/><circle cx="-9.2" cy="-27.3" r="1.57"/><circle cx="25.3" cy="14.0" r="1.58"/><circle cx="-28.2" cy="6.8" r="1.58"/><circle cx="16.2" cy="-24.2" r="1.58"/><circle cx="4.4" cy="28.9" r="1.59"/><circle cx="-22.8" cy="-18.4" r="1.59"/><circle cx="29.3" cy="-1.9" r="1.60"/><circle cx="-20.4" cy="21.2" r="1.60"/><circle cx="0.7" cy="-29.5" r="1.60"/><circle cx="19.5" cy="22.3" r="1.61"/><circle cx="-29.5" cy="-3.3" r="1.61"/><circle cx="24.1" cy="-17.5" r="1.62"/><circle cx="-5.9" cy="29.3" r="1.62"/><circle cx="-15.4" cy="-25.6" r="1.62"/><circle cx="28.8" cy="8.5" r="1.63"/><circle cx="-27.0" cy="13.2" r="1.63"/><circle cx="11.0" cy="-28.1" r="1.64"/><circle cx="10.9" cy="28.2" r="1.64"/><circle cx="-27.1" cy="-13.5" r="1.64"/><circle cx="29.2" cy="-8.4" r="1.65"/><circle cx="-15.9" cy="26.0" r="1.65"/><circle cx="-5.8" cy="-30.0" r="1.66"/><circle cx="24.6" cy="18.2" r="1.66"/><circle cx="-30.6" cy="3.2" r="1.66"/><circle cx="20.4" cy="-23.1" r="1.67"/><circle cx="0.5" cy="30.9" r="1.67"/><circle cx="-21.3" cy="-22.5" r="1.67"/><circle cx="31.0" cy="2.2" r="1.68"/><circle cx="-24.4" cy="19.3" r="1.68"/><circle cx="4.9" cy="-30.8" r="1.69"/><circle cx="17.2" cy="26.1" r="1.69"/><circle cx="-30.4" cy="-7.6" r="1.69"/><circle cx="27.6" cy="-15.0" r="1.70"/><circle cx="-10.3" cy="29.8" r="1.70"/><circle cx="-12.5" cy="-29.0" r="1.71"/><circle cx="28.9" cy="12.9" r="1.71"/><circle cx="-30.1" cy="10.0" r="1.71"/><circle cx="15.5" cy="-27.8" r="1.72"/><circle cx="7.4" cy="31.0" r="1.72"/><circle cx="-26.5" cy="-17.9" r="1.73"/><circle cx="31.7" cy="-4.7" r="1.73"/><circle cx="-20.3" cy="24.9" r="1.73"/><circle cx="-1.9" cy="-32.1" r="1.74"/><circle cx="23.1" cy="22.5" r="1.74"/><circle cx="-32.3" cy="-0.9" r="1.75"/><circle cx="24.5" cy="-21.2" r="1.75"/><circle cx="-3.8" cy="32.3" r="1.75"/><circle cx="-19.0" cy="-26.4" r="1.76"/><circle cx="32.0" cy="6.6" r="1.76"/><circle cx="-28.1" cy="16.7" r="1.76"/><circle cx="9.4" cy="-31.4" r="1.77"/><circle cx="14.3" cy="29.6" r="1.77"/><circle cx="-30.6" cy="-12.2" r="1.78"/><circle cx="30.9" cy="-11.7" r="1.78"/><circle cx="-14.9" cy="29.5" r="1.78"/><circle cx="-9.0" cy="-31.9" r="1.79"/><circle cx="28.2" cy="17.5" r="1.79"/><circle cx="-32.7" cy="6.2" r="1.80"/></g>
+<circle r="36" fill="none" stroke="#ffb400" stroke-opacity=".5" stroke-width="1.2"/>
+</svg>
+    <h1 class="serif rise" style="--d:.9s">Welcome to <b>Sunflower</b></h1>
+  </div>
+  <div class="mid">
+    <p class="label serif rise" style="--d:1.2s">delowe projects</p>
+    <a class="card rise" style="--d:1.4s" href="https://linc.sunflower.co.zw">
+      <img src="linc-icon-sm.webp" alt="" width="54" height="54" decoding="async">
+      <span><b>Linc</b><small>linc.sunflower.co.zw</small></span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+  <a class="mail rise" style="--d:1.7s" href="mailto:deloweprojects@gmail.com">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>
+    deloweprojects@gmail.com
   </a>
 </main>
-<footer class="mono"><a href="https://github.com/deloweProjects">github.com/deloweProjects</a></footer>
 </body>
 </html>
