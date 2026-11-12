@@ -17,10 +17,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/atropos@2.0.2/atropos.min.css">
 <style>
 :root{color-scheme:light dark;
-  --bg:#f3f2ee;--ink:#14130f;--soft:#6b6a63;--line:rgba(0,0,0,.11);--acc:#14130f;--stroke:rgba(0,0,0,.045);--fill:rgba(0,0,0,.022);
+  --bg:#f3f2ee;--ink:#14130f;--soft:#6b6a63;--line:rgba(0,0,0,.11);--acc:#14130f;--stroke:rgba(0,0,0,.05);--run:rgba(0,0,0,.34);
   --gA:rgba(255,255,255,.95);--gB:rgba(0,0,0,.07);--card:rgba(255,255,255,.55);--grain:.05;--fl:rgba(0,0,0,.2);--sh:0 30px 70px -30px rgba(40,30,0,.35)}
 @media (prefers-color-scheme:dark){:root{
-  --bg:#06070a;--ink:#ecebe6;--soft:#8b8d93;--line:rgba(255,255,255,.1);--acc:#f4f4f2;--stroke:rgba(255,255,255,.04);--fill:rgba(255,255,255,.02);
+  --bg:#06070a;--ink:#ecebe6;--soft:#8b8d93;--line:rgba(255,255,255,.1);--acc:#f4f4f2;--stroke:rgba(255,255,255,.05);--run:rgba(255,255,255,.34);
   --gA:rgba(255,255,255,.07);--gB:rgba(255,255,255,.06);--card:rgba(255,255,255,.04);--grain:.07;--fl:rgba(255,255,255,.22);--sh:0 30px 80px -30px #000}}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
@@ -49,21 +49,23 @@ a{color:inherit}
 @keyframes fade{to{opacity:1}}
 
 /* giant outlined wordmark */
-.word{position:fixed;inset:-6vh -4vw;z-index:1;display:grid;place-items:center;pointer-events:none;user-select:none;overflow:hidden;
+.word{position:fixed;inset:0;z-index:1;pointer-events:none;user-select:none;overflow:hidden;
   -webkit-mask-image:radial-gradient(75% 70% at 50% 50%,#000 35%,transparent 100%);mask-image:radial-gradient(75% 70% at 50% 50%,#000 35%,transparent 100%)}
-.word p{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro",Inter,system-ui,sans-serif;font-weight:800;font-size:min(27vw,56vh);line-height:.84;letter-spacing:-.055em;white-space:nowrap;text-align:center;
-  position:absolute;left:50%;top:50%;transform:translate3d(calc(-50% + var(--px,0)*-22px),calc(-50% + var(--py,0)*-14px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.word em{display:block;font-style:normal}
-.word span{display:inline-block;color:transparent;-webkit-text-stroke:1.2px var(--stroke);
-  background-image:linear-gradient(180deg,var(--fill),transparent 78%);-webkit-background-clip:text;background-clip:text;
-  opacity:0;transform:translateY(40px) scale(.98);filter:blur(16px);animation:letter 2s calc(.2s + var(--i)*.09s) cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes letter{to{opacity:1;transform:none;filter:none}}
+.word .px{position:absolute;left:50%;top:50%;width:min(140vw,175vh);transform:translate3d(calc(-50% + var(--px,0)*-22px),calc(-50% + var(--py,0)*-14px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1);opacity:0;animation:fade 2.6s .4s forwards}
+.word svg{display:block;width:100%;height:auto;overflow:visible}
+.word text{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro",Inter,system-ui,sans-serif;font-weight:800;text-anchor:middle;letter-spacing:-.04em}
+.word .base{fill:none;stroke:var(--stroke);stroke-width:1.1}
+.word .run{fill:none;stroke:var(--run);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:120 780;animation:dash 7s linear infinite}
+.word .run.b{stroke-dasharray:60 1040;animation-duration:11s;animation-direction:reverse}
+@keyframes dash{to{stroke-dashoffset:-900}}
+@keyframes dash2{to{stroke-dashoffset:-1100}}
+.word .run.b{animation-name:dash2}
 
 /* foreground */
 main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:clamp(22px,5vh,48px) 22px clamp(24px,5vh,44px);text-align:center}
 .top{display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.4vh,22px)}
-.sun{width:clamp(96px,16vmin,140px);height:auto;opacity:0;transform:scale(.7) rotate(-30deg);animation:bloom 1.8s .3s cubic-bezier(.2,.8,.2,1) forwards}
-.r1{animation:spin 120s linear infinite}.r2{animation:spin 110s linear infinite reverse}.sd{animation:spin 200s linear infinite}
+.sun{width:clamp(110px,19vmin,170px);height:auto;opacity:0;transform:scale(.7) rotate(-30deg);animation:bloom 1.8s .3s cubic-bezier(.2,.8,.2,1) forwards}
+#dots circle{transition:transform 1.9s cubic-bezier(.7,0,.2,1) calc(var(--i)*1.6ms)}.r2{animation:spin 110s linear infinite reverse}.sd{animation:spin 200s linear infinite}
 .r1,.r2,.sd,.orb,.orb2{transform-origin:0 0}.orb{animation:spin 24s linear infinite}.orb2{animation:spin 24s linear infinite reverse}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes bloom{to{opacity:1;transform:none}}
@@ -115,17 +117,20 @@ h1 b{font-weight:700}
 .rise{opacity:0;transform:translateY(24px);filter:blur(8px);animation:rise 1.2s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none;filter:none}}
 @media (max-width:560px){.word p{font-size:27vw}.linccard{height:210px}.linccard .nm{font-size:38px}}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important}.r1,.r2,.sd,.orb,.orb2,.amb i,.floor:after,.scan{animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important}.r1,.r2,.sd,.orb,.orb2,.amb i,.floor:after,.scan,.run{animation:none!important}}
 </style>
 </head>
 <body>
 <div class="amb" aria-hidden="true"><div class="floor"></div><i class="a1"></i><i class="a2"></i><div id="spot"></div></div>
 <div class="noise" aria-hidden="true"></div>
 <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-<div class="word disp" aria-hidden="true"><p><em><span style="--i:0">S</span><span style="--i:1">U</span><span style="--i:2">N</span></em><em><span style="--i:3">F</span><span style="--i:4">L</span><span style="--i:5">O</span><span style="--i:6">W</span><span style="--i:7">E</span><span style="--i:8">R</span></em></p></div>
+<div class="word" aria-hidden="true"><div class="px"><svg viewBox="0 0 1000 640">
+<defs><g id="w"><text x="500" y="300" font-size="330" text-anchor="middle">SUN</text><text x="500" y="590" font-size="330" text-anchor="middle">FLOWER</text></g></defs>
+<use href="#w" class="base"/><use href="#w" class="run"/><use href="#w" class="run b"/>
+</svg></div></div>
 <main>
   <div class="top">
-    <svg class="sun" viewBox="-62 -62 124 124" aria-hidden="true"><g class="r1" fill="var(--acc)"><circle cx="-3.36" cy="3.07" r="0.76" opacity="1"/><circle cx="0.56" cy="-6.41" r="0.77" opacity="1"/><circle cx="4.80" cy="6.25" r="0.77" opacity="1"/><circle cx="-8.96" cy="-1.59" r="0.78" opacity="1"/><circle cx="8.58" cy="-5.46" r="0.79" opacity="1"/><circle cx="-2.89" cy="10.76" r="0.80" opacity="1"/><circle cx="-5.55" cy="-10.68" r="0.81" opacity="1"/><circle cx="12.09" cy="4.41" r="0.81" opacity="1"/><circle cx="-12.62" cy="5.21" r="0.82" opacity="1"/><circle cx="6.10" cy="-13.03" r="0.83" opacity="1"/><circle cx="4.52" cy="14.40" r="0.84" opacity="1"/><circle cx="-13.64" cy="-7.90" r="0.85" opacity="1"/><circle cx="16.02" cy="-3.52" r="0.85" opacity="1"/><circle cx="-9.79" cy="13.93" r="0.86" opacity="1"/><circle cx="-2.26" cy="-17.48" r="0.87" opacity="1"/><circle cx="13.92" cy="11.73" r="0.88" opacity="1"/><circle cx="-18.74" cy="0.78" r="0.89" opacity="1"/><circle cx="13.68" cy="-13.62" r="0.89" opacity="1"/><circle cx="-0.92" cy="19.81" r="0.90" opacity="1"/><circle cx="-13.04" cy="-15.62" r="0.91" opacity="1"/><circle cx="20.66" cy="2.78" r="0.92" opacity="1"/><circle cx="-17.52" cy="12.19" r="0.93" opacity="1"/><circle cx="4.79" cy="-21.29" r="0.93" opacity="1"/><circle cx="11.08" cy="19.34" r="0.94" opacity="1"/><circle cx="-21.67" cy="-6.91" r="0.95" opacity="1"/><circle cx="21.06" cy="-9.73" r="0.96" opacity="1"/><circle cx="-9.13" cy="21.81" r="0.97" opacity="1"/><circle cx="-8.15" cy="-22.66" r="0.97" opacity="1"/><circle cx="21.69" cy="11.40" r="0.98" opacity="1"/><circle cx="-24.10" cy="6.35" r="0.99" opacity="1"/><circle cx="13.70" cy="-21.31" r="1.00" opacity="1"/><circle cx="4.36" cy="25.37" r="1.01" opacity="1"/><circle cx="-20.67" cy="-16.00" r="1.01" opacity="1"/><circle cx="26.44" cy="-2.19" r="1.02" opacity="1"/><circle cx="-18.28" cy="19.76" r="1.03" opacity="1"/><circle cx="0.13" cy="-27.30" r="1.04" opacity="1"/><circle cx="18.60" cy="20.50" r="1.05" opacity="1"/><circle cx="-27.93" cy="-2.59" r="1.05" opacity="1"/><circle cx="22.63" cy="-17.18" r="1.06" opacity="1"/><circle cx="-5.15" cy="28.31" r="1.07" opacity="1"/><circle cx="-15.52" cy="-24.66" r="1.08" opacity="1"/><circle cx="28.44" cy="7.79" r="1.09" opacity="1"/><circle cx="-26.54" cy="13.62" r="1.09" opacity="1"/><circle cx="10.49" cy="-28.30" r="1.10" opacity="1"/><circle cx="11.51" cy="28.27" r="1.11" opacity="1"/><circle cx="-27.89" cy="-13.22" r="1.12" opacity="1"/><circle cx="29.81" cy="-9.19" r="1.13" opacity="1"/><circle cx="-15.94" cy="27.20" r="1.13" opacity="1"/><circle cx="-6.69" cy="-31.14" r="1.14" opacity="1"/><circle cx="26.23" cy="18.63" r="1.15" opacity="1"/><circle cx="-32.24" cy="4.02" r="1.16" opacity="1"/><circle cx="21.27" cy="-24.99" r="1.17" opacity="1"/><circle cx="1.21" cy="33.10" r="1.17" opacity="1"/><circle cx="-23.47" cy="-23.81" r="1.18" opacity="1"/><circle cx="33.70" cy="1.72" r="1.19" opacity="1"/><circle cx="-26.25" cy="21.69" r="1.20" opacity="1"/><circle cx="4.75" cy="-34.02" r="1.21" opacity="1"/><circle cx="19.65" cy="28.54" r="1.21" opacity="1"/><circle cx="-34.06" cy="-7.84" r="1.22" opacity="1"/><circle cx="30.66" cy="-17.37" r="1.23" opacity="1"/><circle cx="-10.97" cy="33.80" r="1.24"/><circle cx="-14.87" cy="-32.60" r="1.25"/><circle cx="33.25" cy="14.10" r="1.25"/><circle cx="-34.31" cy="12.15" r="1.26"/><circle cx="17.22" cy="-32.39" r="1.27"/><circle cx="9.25" cy="35.79" r="1.28"/><circle cx="-31.23" cy="-20.30" r="1.29"/><circle cx="37.01" cy="-6.17" r="1.29"/><circle cx="-23.29" cy="29.77" r="1.30"/><circle cx="-2.96" cy="-37.95" r="1.31"/><circle cx="28.02" cy="26.17" r="1.32"/><circle cx="-38.61" cy="-0.38" r="1.32"/><circle cx="28.92" cy="-25.98" r="1.33"/><circle cx="-3.80" cy="38.96" r="1.34"/><circle cx="-23.67" cy="-31.50" r="1.35"/><circle cx="38.99" cy="7.29" r="1.36"/><circle cx="-33.90" cy="21.10" r="1.36"/><circle cx="10.81" cy="-38.70" r="1.37"/><circle cx="18.29" cy="36.07" r="1.38"/><circle cx="-38.09" cy="-14.33" r="1.39"/><circle cx="38.00" cy="-15.25" r="1.40"/><circle cx="-17.83" cy="37.15" r="1.40"/><circle cx="-12.02" cy="-39.67" r="1.41"/><circle cx="35.87" cy="21.26" r="1.42"/><circle cx="-41.06" cy="8.61" r="1.43"/><circle cx="24.60" cy="-34.28" r="1.44"/><circle cx="5.04" cy="42.14" r="1.44"/><circle cx="-32.37" cy="-27.82" r="1.45"/><circle cx="42.90" cy="-1.36" r="1.46"/><circle cx="-30.89" cy="30.15" r="1.47"/><circle cx="2.43" cy="-43.34" r="1.48"/><circle cx="27.63" cy="33.78" r="1.48"/><circle cx="-43.43" cy="-6.28" r="1.49"/><circle cx="36.46" cy="-24.84" r="1.50"/><circle cx="-10.16" cy="43.17" r="1.51"/><circle cx="-21.79" cy="-38.89" r="1.52"/><circle cx="42.56" cy="14.04" r="1.52"/><circle cx="-41.07" cy="18.49" r="1.53"/><circle cx="17.88" cy="-41.59" r="1.54"/><circle cx="14.98" cy="42.96" r="1.55"/><circle cx="-40.27" cy="-21.67" r="1.56"/><circle cx="44.55" cy="-11.28" r="1.56"/><circle cx="-25.35" cy="38.60" r="1.57"/><circle cx="-7.41" cy="-45.81" r="1.58"/><circle cx="36.58" cy="28.91" r="1.59"/><circle cx="-46.72" cy="3.41" r="1.60"/><circle cx="32.30" cy="-34.24" r="1.60"/><circle cx="-0.69" cy="47.28" r="1.61"/><circle cx="-31.57" cy="-35.49" r="1.62"/><circle cx="47.47" cy="4.87" r="1.63"/><circle cx="-38.47" cy="28.61" r="1.64"/><circle cx="9.08" cy="-47.29" r="1.64"/><circle cx="25.36" cy="41.19" r="1.65"/><circle cx="-46.73" cy="-13.30" r="1.66"/><circle cx="43.63" cy="-21.85" r="1.67"/><circle cx="-17.48" cy="45.78" r="1.68"/><circle cx="-18.11" cy="-45.76" r="1.68"/><circle cx="44.46" cy="21.60" r="1.69"/><circle cx="-47.57" cy="14.16" r="1.70"/><circle cx="25.62" cy="-42.75" r="1.71"/><circle cx="10.03" cy="49.03" r="1.72"/><circle cx="-40.69" cy="-29.50" r="1.72"/><circle cx="50.13" cy="-5.75" r="1.73"/><circle cx="-33.22" cy="38.26" r="1.74"/><circle cx="-1.36" cy="-50.85" r="1.75"/><circle cx="35.49" cy="36.73" r="1.76"/><circle cx="-51.18" cy="-3.12" r="1.76"/><circle cx="40.00" cy="-32.40" r="1.77"/><circle cx="-7.64" cy="51.11" r="1.78"/><circle cx="-29.00" cy="-43.01" r="1.79"/><circle cx="50.63" cy="12.17" r="1.80"/><circle cx="-45.73" cy="25.32" r="1.80"/><circle cx="16.68" cy="-49.75" r="1.81"/><circle cx="21.39" cy="48.13" r="1.82"/><circle cx="-48.46" cy="-21.12" r="1.83"/><circle cx="50.19" cy="-17.23" r="1.84"/><circle cx="-25.46" cy="46.77" r="1.84"/><circle cx="-12.87" cy="-51.88" r="1.85"/><circle cx="44.69" cy="29.67" r="1.86"/><circle cx="-53.19" cy="8.34" r="1.87"/><circle cx="33.70" cy="-42.23" r="1.88"/><circle cx="3.69" cy="54.09" r="1.88"/><circle cx="-39.40" cy="-37.53" r="1.89"/><circle cx="54.59" cy="1.07" r="1.90"/></g></svg>
+    <svg class="sun" viewBox="-62 -62 124 124" aria-hidden="true"><g class="r1" id="dots" fill="var(--acc)"><circle cx="-3.36" cy="3.07" r="0.76" opacity="1"/><circle cx="0.56" cy="-6.41" r="0.77" opacity="1"/><circle cx="4.80" cy="6.25" r="0.77" opacity="1"/><circle cx="-8.96" cy="-1.59" r="0.78" opacity="1"/><circle cx="8.58" cy="-5.46" r="0.79" opacity="1"/><circle cx="-2.89" cy="10.76" r="0.80" opacity="1"/><circle cx="-5.55" cy="-10.68" r="0.81" opacity="1"/><circle cx="12.09" cy="4.41" r="0.81" opacity="1"/><circle cx="-12.62" cy="5.21" r="0.82" opacity="1"/><circle cx="6.10" cy="-13.03" r="0.83" opacity="1"/><circle cx="4.52" cy="14.40" r="0.84" opacity="1"/><circle cx="-13.64" cy="-7.90" r="0.85" opacity="1"/><circle cx="16.02" cy="-3.52" r="0.85" opacity="1"/><circle cx="-9.79" cy="13.93" r="0.86" opacity="1"/><circle cx="-2.26" cy="-17.48" r="0.87" opacity="1"/><circle cx="13.92" cy="11.73" r="0.88" opacity="1"/><circle cx="-18.74" cy="0.78" r="0.89" opacity="1"/><circle cx="13.68" cy="-13.62" r="0.89" opacity="1"/><circle cx="-0.92" cy="19.81" r="0.90" opacity="1"/><circle cx="-13.04" cy="-15.62" r="0.91" opacity="1"/><circle cx="20.66" cy="2.78" r="0.92" opacity="1"/><circle cx="-17.52" cy="12.19" r="0.93" opacity="1"/><circle cx="4.79" cy="-21.29" r="0.93" opacity="1"/><circle cx="11.08" cy="19.34" r="0.94" opacity="1"/><circle cx="-21.67" cy="-6.91" r="0.95" opacity="1"/><circle cx="21.06" cy="-9.73" r="0.96" opacity="1"/><circle cx="-9.13" cy="21.81" r="0.97" opacity="1"/><circle cx="-8.15" cy="-22.66" r="0.97" opacity="1"/><circle cx="21.69" cy="11.40" r="0.98" opacity="1"/><circle cx="-24.10" cy="6.35" r="0.99" opacity="1"/><circle cx="13.70" cy="-21.31" r="1.00" opacity="1"/><circle cx="4.36" cy="25.37" r="1.01" opacity="1"/><circle cx="-20.67" cy="-16.00" r="1.01" opacity="1"/><circle cx="26.44" cy="-2.19" r="1.02" opacity="1"/><circle cx="-18.28" cy="19.76" r="1.03" opacity="1"/><circle cx="0.13" cy="-27.30" r="1.04" opacity="1"/><circle cx="18.60" cy="20.50" r="1.05" opacity="1"/><circle cx="-27.93" cy="-2.59" r="1.05" opacity="1"/><circle cx="22.63" cy="-17.18" r="1.06" opacity="1"/><circle cx="-5.15" cy="28.31" r="1.07" opacity="1"/><circle cx="-15.52" cy="-24.66" r="1.08" opacity="1"/><circle cx="28.44" cy="7.79" r="1.09" opacity="1"/><circle cx="-26.54" cy="13.62" r="1.09" opacity="1"/><circle cx="10.49" cy="-28.30" r="1.10" opacity="1"/><circle cx="11.51" cy="28.27" r="1.11" opacity="1"/><circle cx="-27.89" cy="-13.22" r="1.12" opacity="1"/><circle cx="29.81" cy="-9.19" r="1.13" opacity="1"/><circle cx="-15.94" cy="27.20" r="1.13" opacity="1"/><circle cx="-6.69" cy="-31.14" r="1.14" opacity="1"/><circle cx="26.23" cy="18.63" r="1.15" opacity="1"/><circle cx="-32.24" cy="4.02" r="1.16" opacity="1"/><circle cx="21.27" cy="-24.99" r="1.17" opacity="1"/><circle cx="1.21" cy="33.10" r="1.17" opacity="1"/><circle cx="-23.47" cy="-23.81" r="1.18" opacity="1"/><circle cx="33.70" cy="1.72" r="1.19" opacity="1"/><circle cx="-26.25" cy="21.69" r="1.20" opacity="1"/><circle cx="4.75" cy="-34.02" r="1.21" opacity="1"/><circle cx="19.65" cy="28.54" r="1.21" opacity="1"/><circle cx="-34.06" cy="-7.84" r="1.22" opacity="1"/><circle cx="30.66" cy="-17.37" r="1.23" opacity="1"/><circle cx="-10.97" cy="33.80" r="1.24"/><circle cx="-14.87" cy="-32.60" r="1.25"/><circle cx="33.25" cy="14.10" r="1.25"/><circle cx="-34.31" cy="12.15" r="1.26"/><circle cx="17.22" cy="-32.39" r="1.27"/><circle cx="9.25" cy="35.79" r="1.28"/><circle cx="-31.23" cy="-20.30" r="1.29"/><circle cx="37.01" cy="-6.17" r="1.29"/><circle cx="-23.29" cy="29.77" r="1.30"/><circle cx="-2.96" cy="-37.95" r="1.31"/><circle cx="28.02" cy="26.17" r="1.32"/><circle cx="-38.61" cy="-0.38" r="1.32"/><circle cx="28.92" cy="-25.98" r="1.33"/><circle cx="-3.80" cy="38.96" r="1.34"/><circle cx="-23.67" cy="-31.50" r="1.35"/><circle cx="38.99" cy="7.29" r="1.36"/><circle cx="-33.90" cy="21.10" r="1.36"/><circle cx="10.81" cy="-38.70" r="1.37"/><circle cx="18.29" cy="36.07" r="1.38"/><circle cx="-38.09" cy="-14.33" r="1.39"/><circle cx="38.00" cy="-15.25" r="1.40"/><circle cx="-17.83" cy="37.15" r="1.40"/><circle cx="-12.02" cy="-39.67" r="1.41"/><circle cx="35.87" cy="21.26" r="1.42"/><circle cx="-41.06" cy="8.61" r="1.43"/><circle cx="24.60" cy="-34.28" r="1.44"/><circle cx="5.04" cy="42.14" r="1.44"/><circle cx="-32.37" cy="-27.82" r="1.45"/><circle cx="42.90" cy="-1.36" r="1.46"/><circle cx="-30.89" cy="30.15" r="1.47"/><circle cx="2.43" cy="-43.34" r="1.48"/><circle cx="27.63" cy="33.78" r="1.48"/><circle cx="-43.43" cy="-6.28" r="1.49"/><circle cx="36.46" cy="-24.84" r="1.50"/><circle cx="-10.16" cy="43.17" r="1.51"/><circle cx="-21.79" cy="-38.89" r="1.52"/><circle cx="42.56" cy="14.04" r="1.52"/><circle cx="-41.07" cy="18.49" r="1.53"/><circle cx="17.88" cy="-41.59" r="1.54"/><circle cx="14.98" cy="42.96" r="1.55"/><circle cx="-40.27" cy="-21.67" r="1.56"/><circle cx="44.55" cy="-11.28" r="1.56"/><circle cx="-25.35" cy="38.60" r="1.57"/><circle cx="-7.41" cy="-45.81" r="1.58"/><circle cx="36.58" cy="28.91" r="1.59"/><circle cx="-46.72" cy="3.41" r="1.60"/><circle cx="32.30" cy="-34.24" r="1.60"/><circle cx="-0.69" cy="47.28" r="1.61"/><circle cx="-31.57" cy="-35.49" r="1.62"/><circle cx="47.47" cy="4.87" r="1.63"/><circle cx="-38.47" cy="28.61" r="1.64"/><circle cx="9.08" cy="-47.29" r="1.64"/><circle cx="25.36" cy="41.19" r="1.65"/><circle cx="-46.73" cy="-13.30" r="1.66"/><circle cx="43.63" cy="-21.85" r="1.67"/><circle cx="-17.48" cy="45.78" r="1.68"/><circle cx="-18.11" cy="-45.76" r="1.68"/><circle cx="44.46" cy="21.60" r="1.69"/><circle cx="-47.57" cy="14.16" r="1.70"/><circle cx="25.62" cy="-42.75" r="1.71"/><circle cx="10.03" cy="49.03" r="1.72"/><circle cx="-40.69" cy="-29.50" r="1.72"/><circle cx="50.13" cy="-5.75" r="1.73"/><circle cx="-33.22" cy="38.26" r="1.74"/><circle cx="-1.36" cy="-50.85" r="1.75"/><circle cx="35.49" cy="36.73" r="1.76"/><circle cx="-51.18" cy="-3.12" r="1.76"/><circle cx="40.00" cy="-32.40" r="1.77"/><circle cx="-7.64" cy="51.11" r="1.78"/><circle cx="-29.00" cy="-43.01" r="1.79"/><circle cx="50.63" cy="12.17" r="1.80"/><circle cx="-45.73" cy="25.32" r="1.80"/><circle cx="16.68" cy="-49.75" r="1.81"/><circle cx="21.39" cy="48.13" r="1.82"/><circle cx="-48.46" cy="-21.12" r="1.83"/><circle cx="50.19" cy="-17.23" r="1.84"/><circle cx="-25.46" cy="46.77" r="1.84"/><circle cx="-12.87" cy="-51.88" r="1.85"/><circle cx="44.69" cy="29.67" r="1.86"/><circle cx="-53.19" cy="8.34" r="1.87"/><circle cx="33.70" cy="-42.23" r="1.88"/><circle cx="3.69" cy="54.09" r="1.88"/><circle cx="-39.40" cy="-37.53" r="1.89"/><circle cx="54.59" cy="1.07" r="1.90"/></g></svg>
     <h1 class="disp rise" style="--d:.9s">delowe <b>projects</b></h1>
   </div>
   <div class="mid">
@@ -148,6 +153,91 @@ h1 b{font-weight:700}
   <a class="mail rise" style="--d:1.7s" href="mailto:deloweprojects@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>deloweprojects@gmail.com</a>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/atropos@2.0.2/atropos.min.js" defer></script>
+<script>
+(function () {
+  var TAU = Math.PI * 2, GA = Math.PI * (3 - Math.sqrt(5));
+  function heart(x, y) { var a = x * x + y * y - 1; return a * a * a - x * x * y * y * y <= 0; }
+  function hex(R, step, fn) {
+    var h = step * 0.866, nj = Math.ceil(R / h), ni = Math.ceil(R / step) + 1;
+    for (var j = -nj; j <= nj; j++) for (var i = -ni; i <= ni; i++) fn(i * step + (j & 1 ? step / 2 : 0), j * h);
+  }
+  var V = [];
+
+  // 0 - the reference, in halftone dots: heart petals alternating with ovals around a dotted disc
+  V.push(function () {
+    var d = [];
+    hex(24, 4.3, function (x, y) { var r = Math.hypot(x, y); if (r < 23.5) d.push([x, y, 1.85 - 1.05 * r / 23.5]); });
+    for (var k = 0; k < 12; k++) {
+      var a = k * TAU / 12 - Math.PI / 2, c = Math.cos(a), s = Math.sin(a), big = k % 2 === 0, cu = 43;
+      hex(16, 2.9, function (px, py) {
+        var du = px, tv = py, ok, t;
+        if (big) { var sc = 8.4; ok = heart(tv / sc, du / sc + 0.12); t = (du + sc) / (sc * 2.3); }
+        else { ok = (du * du) / 144 + (tv * tv) / 20 <= 1; t = (du + 12) / 24; }
+        if (!ok) return;
+        var rad = cu + du, ox = c * rad - s * tv, oy = s * rad + c * tv;
+        d.push([ox, oy, 1.45 - 0.6 * Math.min(1, Math.max(0, t))]);
+      });
+    }
+    return d;
+  });
+
+  // 1 - phyllotaxis head: seeds at the golden angle
+  V.push(function () {
+    var d = [];
+    for (var i = 1; i <= 240; i++) { var r = 3.6 * Math.sqrt(i), a = i * GA; d.push([r * Math.cos(a), r * Math.sin(a), 0.7 + 1.15 * i / 240]); }
+    return d;
+  });
+
+  // 2 - concentric rings, like a sun dial
+  V.push(function () {
+    var d = [[0, 0, 1.7]];
+    for (var k = 1; k <= 7; k++) { var R = k * 7.9, n = Math.round(6 * k * 1.08 + 1); for (var i = 0; i < n; i++) { var a = i * TAU / n + (k % 2) * 0.12; d.push([R * Math.cos(a), R * Math.sin(a), 0.75 + 0.1 * k]); } }
+    return d;
+  });
+
+  // 3 - sixteen rays of growing dots
+  V.push(function () {
+    var d = [[0, 0, 1.6]];
+    for (var k = 0; k < 16; k++) { var a = k * TAU / 16, long = k % 2 === 0; for (var j = 0; j < (long ? 12 : 8); j++) { var R = 12 + j * (long ? 3.9 : 3.8); d.push([R * Math.cos(a), R * Math.sin(a), 0.55 + 0.1 * j]); } }
+    return d;
+  });
+
+  // 4 - halftone disc: big dots in the middle, fading outward
+  V.push(function () {
+    var d = [];
+    hex(56, 5.1, function (x, y) { var r = Math.hypot(x, y); if (r <= 55) d.push([x, y, 2.0 * (1 - r / 58) + 0.35]); });
+    return d;
+  });
+
+  function build() {
+    var sets = V.map(function (f) { return f(); }), N = 0;
+    sets.forEach(function (s) { N = Math.max(N, s.length); });
+    sets = sets.map(function (s) {
+      s = s.map(function (p) { var a = Math.atan2(p[1], p[0]) + Math.PI; return [p[0], p[1], p[2], Math.floor(a / (TAU / 28)) * 1000 + Math.hypot(p[0], p[1])]; });
+      s.sort(function (a, b) { return a[3] - b[3]; });
+      var out = [];
+      for (var i = 0; i < N; i++) out.push(i < s.length ? s[Math.floor(i * s.length / Math.min(N, s.length))] : [0, 0, 0]);
+      return out;
+    });
+    return { sets: sets, N: N };
+  }
+
+  var g = document.getElementById('dots');
+  if (!g || !('transition' in g.style)) return;
+  var B = build(), NS = 'http://www.w3.org/2000/svg', dots = [], cur = 0;
+  g.textContent = '';
+  for (var i = 0; i < B.N; i++) { var c = document.createElementNS(NS, 'circle'); c.setAttribute('r', 1); c.style.setProperty('--i', i); g.appendChild(c); dots.push(c); }
+  function show(k) {
+    var s = B.sets[k];
+    for (var i = 0; i < dots.length; i++) dots[i].style.transform = 'translate(' + s[i][0].toFixed(2) + 'px,' + s[i][1].toFixed(2) + 'px) scale(' + s[i][2].toFixed(2) + ')';
+  }
+  show(0);
+  if (!matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    setInterval(function () { if (document.hidden) return; cur = (cur + 1) % B.sets.length; show(cur); }, 5000);
+  }
+  window.__logo = { B: B, show: show };
+})();
+</script>
 <script>
 (function(){
   var r=document.documentElement,q=0,x=0,y=0;
