@@ -114,6 +114,13 @@ h1 b{font-weight:700}
 @media (max-width:760px){.g2,.g4{display:none}.g1{--gx:-94%}.g3{--gx:94%}}
 @media (prefers-reduced-motion:reduce){.ghost i{animation:none}}
 
+/* leaving for Linc: the card opens into a full-screen circle, the rest falls away */
+#go{position:fixed;inset:0;z-index:100;pointer-events:none;background:#0a110a;clip-path:circle(0 at var(--gx,50%) var(--gy,50%));transition:clip-path .85s cubic-bezier(.7,0,.2,1)}
+#go.on{clip-path:circle(150vmax at var(--gx,50%) var(--gy,50%))}
+#go img{position:absolute;left:var(--gx,50%);top:var(--gy,50%);width:92px;height:92px;margin:-46px 0 0 -46px;border-radius:24px;opacity:0;transform:scale(.7);transition:opacity .4s .35s,transform .6s .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 20px 50px -10px rgba(0,0,0,.7)}
+#go.on img{opacity:1;transform:scale(1)}
+body.leaving main,body.leaving .word,body.leaving .amb,body.leaving .hud{transition:opacity .6s,transform .8s cubic-bezier(.7,0,.2,1),filter .6s;opacity:0;transform:scale(.94);filter:blur(10px)}
+
 .rise{opacity:0;transform:translateY(24px);filter:blur(8px);animation:rise 1.2s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none;filter:none}}
 @media (max-width:560px){.word p{font-size:27vw}.linccard{height:210px}.linccard .nm{font-size:38px}}
@@ -245,6 +252,26 @@ h1 b{font-weight:700}
   addEventListener('load',function(){
     if(window.Atropos&&!matchMedia('(prefers-reduced-motion:reduce)').matches)
       Atropos({el:'.linccard',activeOffset:34,shadowScale:1.02,rotateXMax:11,rotateYMax:11,highlight:true,shadow:true});
+  });
+})();
+</script>
+<script>
+(function () {
+  var link = document.querySelector('.linccard');
+  function reset() { document.body.classList.remove('leaving'); var g = document.getElementById('go'); if (g) g.remove(); }
+  addEventListener('pageshow', function (e) { if (e.persisted) reset(); });
+  if (!link) return;
+  link.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    e.preventDefault();
+    var url = link.href + (link.href.indexOf('#') < 0 ? '#in' : '');
+    if (matchMedia('(prefers-reduced-motion:reduce)').matches) { location.href = url; return; }
+    var r = link.getBoundingClientRect(), go = document.createElement('div');
+    go.id = 'go'; go.style.setProperty('--gx', (r.left + r.width / 2) + 'px'); go.style.setProperty('--gy', (r.top + r.height / 2) + 'px');
+    go.innerHTML = '<img src="linc-icon-sm.webp" alt="">';
+    document.body.appendChild(go); document.body.classList.add('leaving');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { go.classList.add('on'); }); });
+    setTimeout(function () { location.href = url; }, 950);
   });
 })();
 </script>
