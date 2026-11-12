@@ -8,7 +8,7 @@
 <meta name="description" content="Welcome. delowe projects.">
 <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#06070a" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 20 20'%3E%3Ccircle r='8.5' fill='none' stroke='%23ffb524' stroke-width='1.6'/%3E%3Ccircle r='3.2' fill='%23ffb524'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 20 20'%3E%3Ccircle r='9.5' fill='%23000'/%3E%3Ccircle r='7' fill='none' stroke='%23fff' stroke-width='1.1'/%3E%3Ccircle r='2.6' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&amp;display=swap&amp;text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz%20">
@@ -16,11 +16,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/atropos@2.0.2/atropos.min.css">
 <style>
 :root{color-scheme:light dark;
-  --bg:#f3f2ee;--ink:#14130f;--soft:#6b6a63;--line:rgba(0,0,0,.11);--acc:#d98600;--stroke:rgba(0,0,0,.085);--fill:rgba(0,0,0,.05);
-  --gA:rgba(255,255,255,.95);--gB:rgba(217,134,0,.12);--card:rgba(255,255,255,.55);--grain:.05;--fl:rgba(0,0,0,.2);--sh:0 30px 70px -30px rgba(40,30,0,.35)}
+  --bg:#f3f2ee;--ink:#14130f;--soft:#6b6a63;--line:rgba(0,0,0,.11);--acc:#14130f;--stroke:rgba(0,0,0,.085);--fill:rgba(0,0,0,.05);
+  --gA:rgba(255,255,255,.95);--gB:rgba(0,0,0,.07);--card:rgba(255,255,255,.55);--grain:.05;--fl:rgba(0,0,0,.2);--sh:0 30px 70px -30px rgba(40,30,0,.35)}
 @media (prefers-color-scheme:dark){:root{
-  --bg:#06070a;--ink:#ecebe6;--soft:#8b8d93;--line:rgba(255,255,255,.1);--acc:#ffb524;--stroke:rgba(255,255,255,.085);--fill:rgba(255,255,255,.05);
-  --gA:rgba(255,255,255,.07);--gB:rgba(255,181,36,.10);--card:rgba(255,255,255,.04);--grain:.07;--fl:rgba(255,255,255,.22);--sh:0 30px 80px -30px #000}}
+  --bg:#06070a;--ink:#ecebe6;--soft:#8b8d93;--line:rgba(255,255,255,.1);--acc:#f4f4f2;--stroke:rgba(255,255,255,.085);--fill:rgba(255,255,255,.05);
+  --gA:rgba(255,255,255,.07);--gB:rgba(255,255,255,.06);--card:rgba(255,255,255,.04);--grain:.07;--fl:rgba(255,255,255,.22);--sh:0 30px 80px -30px #000}}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 "JetBrains Mono",ui-monospace,Consolas,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100svh}
@@ -85,12 +85,31 @@ h1 b{font-weight:700}
 @keyframes scan{to{transform:translateY(320px)}}
 .linccard .tk{position:absolute;width:12px;height:12px;border:0 solid var(--acc);opacity:.8}
 .linccard .tk.a{left:12px;top:12px;border-width:1.5px 0 0 1.5px}.linccard .tk.b{right:12px;top:12px;border-width:1.5px 1.5px 0 0}.linccard .tk.c{left:12px;bottom:12px;border-width:0 0 1.5px 1.5px}.linccard .tk.d{right:12px;bottom:12px;border-width:0 1.5px 1.5px 0}
-.linccard .lbl{position:absolute;right:52px;top:25px;color:var(--soft);font-size:11px;letter-spacing:.26em;text-transform:uppercase}
+.linccard .lbl{position:absolute;right:56px;top:25px;color:var(--soft);font-size:11px;letter-spacing:.26em;text-transform:uppercase}
+.linccard .pin{position:absolute;right:20px;top:20px;width:24px;height:24px;color:var(--acc);transform:rotate(32deg);filter:drop-shadow(0 0 8px var(--acc))}
+.linccard .pin svg{width:24px;height:24px;fill:currentColor;fill-opacity:.18;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .linccard .dot{position:absolute;right:26px;top:28px;width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 18px 2px var(--acc)}
 
 .mail{display:inline-flex;align-items:center;gap:10px;color:var(--soft);text-decoration:none;font-size:14px;padding:10px 4px;border-bottom:1px solid var(--line);transition:color .25s,border-color .25s}
 .mail:hover{color:var(--ink);border-color:var(--acc)}
 .mail svg{width:17px;height:17px;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* the shelf: lots of projects, only Linc is in focus */
+.shelf{position:relative;width:min(100%,420px);margin:0 auto;perspective:1400px}
+.shelf .linccard{position:relative;z-index:3}
+.ghost{position:absolute;top:0;left:0;width:100%;height:230px;border-radius:26px;border:1px solid var(--line);background:var(--card);overflow:hidden;pointer-events:none;z-index:1;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;transform:translateX(0) scale(.9);animation:gin 1.6s var(--gd,1.6s) cubic-bezier(.2,.8,.2,1) forwards}
+.ghost:before{content:"";position:absolute;left:26px;top:26px;width:64px;height:64px;border-radius:18px;background:var(--line)}
+.ghost:after{content:"";position:absolute;left:26px;bottom:62px;width:46%;height:30px;border-radius:9px;background:var(--line);box-shadow:0 44px 0 -10px var(--line)}
+.ghost i{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,var(--gA),transparent 70%);transform:translateX(-120%);animation:sh 2.6s var(--sd,0s) ease-in-out infinite}
+@keyframes sh{to{transform:translateX(120%)}}
+@keyframes gin{to{opacity:var(--go);transform:translateX(var(--gx)) rotateY(var(--gr)) scale(var(--gs));filter:blur(var(--gb))}}
+.g1{--gx:-108%;--gr:16deg;--gs:.9;--gb:5px;--go:.6;--gd:1.6s}
+.g2{--gx:-206%;--gr:24deg;--gs:.8;--gb:9px;--go:.34;--gd:1.8s;--sd:.5s}
+.g3{--gx:108%;--gr:-16deg;--gs:.9;--gb:5px;--go:.6;--gd:1.7s;--sd:1s}
+.g4{--gx:206%;--gr:-24deg;--gs:.8;--gb:9px;--go:.34;--gd:1.9s;--sd:1.5s}
+@media (max-width:760px){.g2,.g4{display:none}.g1{--gx:-94%}.g3{--gx:94%}}
+@media (prefers-reduced-motion:reduce){.ghost i{animation:none}}
 
 .rise{opacity:0;transform:translateY(24px);filter:blur(8px);animation:rise 1.2s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none;filter:none}}
@@ -118,16 +137,19 @@ h1 b{font-weight:700}
   </div>
   <div class="mid">
     <div class="rise" style="--d:1.4s;width:100%;display:flex;justify-content:center">
+      <div class="shelf">
+        <div class="ghost g2" aria-hidden="true"><i></i></div><div class="ghost g1" aria-hidden="true"><i></i></div><div class="ghost g3" aria-hidden="true"><i></i></div><div class="ghost g4" aria-hidden="true"><i></i></div>
       <a class="atropos linccard" href="https://linc.sunflower.co.zw" aria-label="Linc, linc.sunflower.co.zw">
         <span class="atropos-scale"><span class="atropos-rotate"><span class="atropos-inner">
           <span class="cg" data-atropos-offset="-4"></span><span class="scan" data-atropos-offset="-2"></span><span class="tk a" data-atropos-offset="4"></span><span class="tk b" data-atropos-offset="4"></span><span class="tk c" data-atropos-offset="4"></span><span class="tk d" data-atropos-offset="4"></span>
           <img class="ic" data-atropos-offset="9" src="linc-icon-sm.webp" alt="" width="64" height="64" decoding="async">
-          <span class="dot" data-atropos-offset="6"></span><span class="lbl" data-atropos-offset="5">delowe projects</span>
+          <span class="pin" data-atropos-offset="12"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.5h6l-1 5.5 3 3.2V14H7v-1.8L10 9z"/><path d="M12 14v6.5"/></svg></span><span class="lbl" data-atropos-offset="5">delowe projects</span>
           <span class="nm disp" data-atropos-offset="7">Linc</span>
           <span class="url" data-atropos-offset="3">linc.sunflower.co.zw</span>
           <span class="go" data-atropos-offset="10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
         </span></span></span>
       </a>
+      </div>
     </div>
   </div>
   <a class="mail rise" style="--d:1.7s" href="mailto:deloweprojects@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>deloweprojects@gmail.com</a>
