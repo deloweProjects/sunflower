@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>Sunflower</title>
-<meta name="description" content="Welcome to Sunflower. delowe projects.">
+<meta name="description" content="Welcome. delowe projects.">
 <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#06070a" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 20 20'%3E%3Ccircle r='8.5' fill='none' stroke='%23ffb524' stroke-width='1.6'/%3E%3Ccircle r='3.2' fill='%23ffb524'/%3E%3C/svg%3E">
@@ -16,10 +16,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/atropos@2.0.2/atropos.min.css">
 <style>
 :root{color-scheme:light dark;
-  --bg:#f3f2ee;--ink:#14130f;--soft:#6b6a63;--line:rgba(0,0,0,.11);--acc:#d98600;--stroke:rgba(0,0,0,.15);
+  --bg:#f3f2ee;--ink:#14130f;--soft:#6b6a63;--line:rgba(0,0,0,.11);--acc:#d98600;--stroke:rgba(0,0,0,.085);--fill:rgba(0,0,0,.05);
   --gA:rgba(255,255,255,.95);--gB:rgba(217,134,0,.12);--card:rgba(255,255,255,.55);--grain:.05;--fl:rgba(0,0,0,.2);--sh:0 30px 70px -30px rgba(40,30,0,.35)}
 @media (prefers-color-scheme:dark){:root{
-  --bg:#06070a;--ink:#ecebe6;--soft:#8b8d93;--line:rgba(255,255,255,.1);--acc:#ffb524;--stroke:rgba(255,255,255,.14);
+  --bg:#06070a;--ink:#ecebe6;--soft:#8b8d93;--line:rgba(255,255,255,.1);--acc:#ffb524;--stroke:rgba(255,255,255,.085);--fill:rgba(255,255,255,.05);
   --gA:rgba(255,255,255,.07);--gB:rgba(255,181,36,.10);--card:rgba(255,255,255,.04);--grain:.07;--fl:rgba(255,255,255,.22);--sh:0 30px 80px -30px #000}}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
@@ -48,10 +48,14 @@ a{color:inherit}
 @keyframes fade{to{opacity:1}}
 
 /* giant outlined wordmark */
-.word{position:fixed;inset:0;z-index:1;display:grid;place-items:center;pointer-events:none;user-select:none}
-.word p{font-weight:700;font-size:min(11.2vw,34vh);line-height:1;letter-spacing:-.01em;white-space:nowrap;transform:translateY(-1vh)}
-.word span{display:inline-block;color:transparent;-webkit-text-stroke:1.4px var(--stroke);opacity:0;transform:translateY(30px);filter:blur(12px);
-  animation:letter 1.6s calc(.2s + var(--i)*.08s) cubic-bezier(.2,.7,.2,1) forwards}
+.word{position:fixed;inset:-6vh -4vw;z-index:1;display:grid;place-items:center;pointer-events:none;user-select:none;overflow:hidden;
+  -webkit-mask-image:radial-gradient(75% 70% at 50% 50%,#000 35%,transparent 100%);mask-image:radial-gradient(75% 70% at 50% 50%,#000 35%,transparent 100%)}
+.word p{font-weight:800;font-size:min(27vw,56vh);line-height:.8;letter-spacing:-.02em;white-space:nowrap;text-align:center;
+  position:absolute;left:50%;top:50%;transform:translate3d(calc(-50% + var(--px,0)*-22px),calc(-50% + var(--py,0)*-14px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.word em{display:block;font-style:normal}
+.word span{display:inline-block;color:transparent;-webkit-text-stroke:1.2px var(--stroke);
+  background-image:linear-gradient(180deg,var(--fill),transparent 78%);-webkit-background-clip:text;background-clip:text;
+  opacity:0;transform:translateY(40px) scale(.98);filter:blur(16px);animation:letter 2s calc(.2s + var(--i)*.09s) cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes letter{to{opacity:1;transform:none;filter:none}}
 
 /* foreground */
@@ -90,7 +94,7 @@ h1 b{font-weight:700}
 
 .rise{opacity:0;transform:translateY(24px);filter:blur(8px);animation:rise 1.2s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none;filter:none}}
-@media (max-width:560px){.word p{font-size:10.6vw}.linccard{height:210px}.linccard .nm{font-size:38px}}
+@media (max-width:560px){.word p{font-size:31vw}.linccard{height:210px}.linccard .nm{font-size:38px}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important}.r1,.r2,.sd,.orb,.orb2,.amb i,.floor:after,.scan{animation:none!important}}
 </style>
 </head>
@@ -98,7 +102,7 @@ h1 b{font-weight:700}
 <div class="amb" aria-hidden="true"><div class="floor"></div><i class="a1"></i><i class="a2"></i><div id="spot"></div></div>
 <div class="noise" aria-hidden="true"></div>
 <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-<div class="word disp" aria-hidden="true"><p><span style="--i:0">S</span><span style="--i:1">U</span><span style="--i:2">N</span><span style="--i:3">F</span><span style="--i:4">L</span><span style="--i:5">O</span><span style="--i:6">W</span><span style="--i:7">E</span><span style="--i:8">R</span></p></div>
+<div class="word disp" aria-hidden="true"><p><em><span style="--i:0">S</span><span style="--i:1">U</span><span style="--i:2">N</span></em><em><span style="--i:3">F</span><span style="--i:4">L</span><span style="--i:5">O</span><span style="--i:6">W</span><span style="--i:7">E</span><span style="--i:8">R</span></em></p></div>
 <main>
   <div class="top">
     <svg class="sun" viewBox="-118 -118 236 236" aria-hidden="true" fill="none" stroke-linecap="round">
@@ -110,7 +114,7 @@ h1 b{font-weight:700}
 <g class="orb2"><circle cx="108" cy="0" r="1.8" fill="var(--ink)" stroke="none" opacity=".7"/></g>
 <g class="sd" fill="var(--ink)" opacity=".55" stroke="none"><circle cx="-1.5" cy="1.4" r="0.55"/><circle cx="0.3" cy="-3.0" r="0.56"/><circle cx="2.2" cy="2.9" r="0.56"/><circle cx="-4.1" cy="-0.7" r="0.56"/><circle cx="4.0" cy="-2.5" r="0.56"/><circle cx="-1.3" cy="5.0" r="0.57"/><circle cx="-2.6" cy="-4.9" r="0.57"/><circle cx="5.6" cy="2.0" r="0.57"/><circle cx="-5.8" cy="2.4" r="0.57"/><circle cx="2.8" cy="-6.0" r="0.58"/><circle cx="2.1" cy="6.6" r="0.58"/><circle cx="-6.3" cy="-3.6" r="0.58"/><circle cx="7.4" cy="-1.6" r="0.58"/><circle cx="-4.5" cy="6.4" r="0.59"/><circle cx="-1.0" cy="-8.1" r="0.59"/><circle cx="6.4" cy="5.4" r="0.59"/><circle cx="-8.7" cy="0.4" r="0.59"/><circle cx="6.3" cy="-6.3" r="0.60"/><circle cx="-0.4" cy="9.1" r="0.60"/><circle cx="-6.0" cy="-7.2" r="0.60"/><circle cx="9.5" cy="1.3" r="0.61"/><circle cx="-8.1" cy="5.6" r="0.61"/><circle cx="2.2" cy="-9.8" r="0.61"/><circle cx="5.1" cy="8.9" r="0.61"/><circle cx="-10.0" cy="-3.2" r="0.62"/><circle cx="9.7" cy="-4.5" r="0.62"/><circle cx="-4.2" cy="10.1" r="0.62"/><circle cx="-3.8" cy="-10.5" r="0.62"/><circle cx="10.0" cy="5.3" r="0.63"/><circle cx="-11.1" cy="2.9" r="0.63"/><circle cx="6.3" cy="-9.8" r="0.63"/><circle cx="2.0" cy="11.7" r="0.63"/><circle cx="-9.5" cy="-7.4" r="0.64"/><circle cx="12.2" cy="-1.0" r="0.64"/><circle cx="-8.4" cy="9.1" r="0.64"/><circle cx="0.1" cy="-12.6" r="0.64"/><circle cx="8.6" cy="9.5" r="0.65"/><circle cx="-12.9" cy="-1.2" r="0.65"/><circle cx="10.4" cy="-7.9" r="0.65"/><circle cx="-2.4" cy="13.1" r="0.66"/><circle cx="-7.2" cy="-11.4" r="0.66"/><circle cx="13.1" cy="3.6" r="0.66"/><circle cx="-12.3" cy="6.3" r="0.66"/><circle cx="4.8" cy="-13.1" r="0.67"/><circle cx="5.3" cy="13.0" r="0.67"/><circle cx="-12.9" cy="-6.1" r="0.67"/><circle cx="13.8" cy="-4.2" r="0.67"/><circle cx="-7.4" cy="12.6" r="0.68"/><circle cx="-3.1" cy="-14.4" r="0.68"/><circle cx="12.1" cy="8.6" r="0.68"/><circle cx="-14.9" cy="1.9" r="0.68"/><circle cx="9.8" cy="-11.5" r="0.69"/><circle cx="0.6" cy="15.3" r="0.69"/><circle cx="-10.8" cy="-11.0" r="0.69"/><circle cx="15.6" cy="0.8" r="0.69"/><circle cx="-12.1" cy="10.0" r="0.70"/><circle cx="2.2" cy="-15.7" r="0.70"/><circle cx="9.1" cy="13.2" r="0.70"/><circle cx="-15.7" cy="-3.6" r="0.71"/><circle cx="14.2" cy="-8.0" r="0.71"/><circle cx="-5.1" cy="15.6" r="0.71"/><circle cx="-6.9" cy="-15.0" r="0.71"/><circle cx="15.3" cy="6.5" r="0.72"/><circle cx="-15.8" cy="5.6" r="0.72"/><circle cx="7.9" cy="-14.9" r="0.72"/><circle cx="4.3" cy="16.5" r="0.72"/><circle cx="-14.4" cy="-9.4" r="0.73"/><circle cx="17.1" cy="-2.8" r="0.73"/><circle cx="-10.7" cy="13.7" r="0.73"/><circle cx="-1.4" cy="-17.5" r="0.73"/><circle cx="12.9" cy="12.1" r="0.74"/><circle cx="-17.8" cy="-0.2" r="0.74"/><circle cx="13.3" cy="-12.0" r="0.74"/><circle cx="-1.8" cy="18.0" r="0.74"/><circle cx="-10.9" cy="-14.5" r="0.75"/><circle cx="18.0" cy="3.4" r="0.75"/><circle cx="-15.6" cy="9.7" r="0.75"/><circle cx="5.0" cy="-17.9" r="0.76"/><circle cx="8.4" cy="16.6" r="0.76"/><circle cx="-17.6" cy="-6.6" r="0.76"/><circle cx="17.5" cy="-7.0" r="0.76"/><circle cx="-8.2" cy="17.1" r="0.77"/><circle cx="-5.5" cy="-18.3" r="0.77"/><circle cx="16.6" cy="9.8" r="0.77"/><circle cx="-18.9" cy="4.0" r="0.77"/><circle cx="11.4" cy="-15.8" r="0.78"/><circle cx="2.3" cy="19.4" r="0.78"/><circle cx="-14.9" cy="-12.8" r="0.78"/><circle cx="19.8" cy="-0.6" r="0.78"/><circle cx="-14.3" cy="13.9" r="0.79"/><circle cx="1.1" cy="-20.0" r="0.79"/><circle cx="12.8" cy="15.6" r="0.79"/><circle cx="-20.0" cy="-2.9" r="0.79"/><circle cx="16.8" cy="-11.5" r="0.80"/><circle cx="-4.7" cy="19.9" r="0.80"/><circle cx="-10.1" cy="-18.0" r="0.80"/><circle cx="19.6" cy="6.5" r="0.81"/><circle cx="-19.0" cy="8.5" r="0.81"/><circle cx="8.3" cy="-19.2" r="0.81"/><circle cx="6.9" cy="19.8" r="0.81"/><circle cx="-18.6" cy="-10.0" r="0.82"/><circle cx="20.6" cy="-5.2" r="0.82"/><circle cx="-11.7" cy="17.8" r="0.82"/><circle cx="-3.4" cy="-21.1" r="0.82"/><circle cx="16.9" cy="13.3" r="0.83"/><circle cx="-21.6" cy="1.6" r="0.83"/><circle cx="14.9" cy="-15.8" r="0.83"/><circle cx="-0.3" cy="21.8" r="0.83"/><circle cx="-14.6" cy="-16.4" r="0.84"/><circle cx="21.9" cy="2.2" r="0.84"/><circle cx="-17.8" cy="13.2" r="0.84"/><circle cx="4.2" cy="-21.8" r="0.84"/><circle cx="11.7" cy="19.0" r="0.85"/><circle cx="-21.6" cy="-6.1" r="0.85"/><circle cx="20.1" cy="-10.1" r="0.85"/><circle cx="-8.1" cy="21.1" r="0.86"/><circle cx="-8.4" cy="-21.1" r="0.86"/><circle cx="20.5" cy="10.0" r="0.86"/><circle cx="-22.0" cy="6.5" r="0.86"/><circle cx="11.8" cy="-19.7" r="0.87"/><circle cx="4.6" cy="22.6" r="0.87"/><circle cx="-18.8" cy="-13.6" r="0.87"/><circle cx="23.1" cy="-2.7" r="0.87"/><circle cx="-15.3" cy="17.7" r="0.88"/><circle cx="-0.6" cy="-23.5" r="0.88"/><circle cx="16.4" cy="17.0" r="0.88"/><circle cx="-23.6" cy="-1.4" r="0.88"/><circle cx="18.5" cy="-15.0" r="0.89"/><circle cx="-3.5" cy="23.6" r="0.89"/><circle cx="-13.4" cy="-19.9" r="0.89"/><circle cx="23.4" cy="5.6" r="0.89"/><circle cx="-21.1" cy="11.7" r="0.90"/><circle cx="7.7" cy="-23.0" r="0.90"/><circle cx="9.9" cy="22.2" r="0.90"/><circle cx="-22.4" cy="-9.7" r="0.91"/><circle cx="23.2" cy="-8.0" r="0.91"/><circle cx="-11.8" cy="21.6" r="0.91"/><circle cx="-5.9" cy="-23.9" r="0.91"/><circle cx="20.6" cy="13.7" r="0.92"/><circle cx="-24.5" cy="3.8" r="0.92"/><circle cx="15.6" cy="-19.5" r="0.92"/><circle cx="1.7" cy="25.0" r="0.92"/><circle cx="-18.2" cy="-17.3" r="0.93"/><circle cx="25.2" cy="0.5" r="0.93"/><circle cx="-19.0" cy="16.7" r="0.93"/><circle cx="2.7" cy="-25.2" r="0.93"/><circle cx="15.1" cy="20.5" r="0.94"/><circle cx="-25.1" cy="-4.9" r="0.94"/><circle cx="21.9" cy="-13.3" r="0.94"/><circle cx="-7.2" cy="24.7" r="0.94"/><circle cx="-11.4" cy="-23.1" r="0.95"/><circle cx="24.1" cy="9.4" r="0.95"/><circle cx="-24.2" cy="9.4" r="0.95"/><circle cx="11.5" cy="-23.4" r="0.96"/><circle cx="7.3" cy="25.1" r="0.96"/><circle cx="-22.4" cy="-13.6" r="0.96"/><circle cx="25.8" cy="-5.1" r="0.96"/><circle cx="-15.6" cy="21.3" r="0.97"/><circle cx="-2.9" cy="-26.3" r="0.97"/><circle cx="20.0" cy="17.5" r="0.97"/><circle cx="-26.6" cy="0.6" r="0.97"/><circle cx="19.3" cy="-18.5" r="0.98"/><circle cx="-1.8" cy="26.8" r="0.98"/><circle cx="-16.8" cy="-21.0" r="0.98"/><circle cx="26.7" cy="4.1" r="0.98"/><circle cx="-22.5" cy="15.0" r="0.99"/><circle cx="6.5" cy="-26.4" r="0.99"/><circle cx="13.1" cy="23.9" r="0.99"/><circle cx="-25.8" cy="-8.8" r="0.99"/><circle cx="25.1" cy="-11.0" r="1.00"/><circle cx="-11.1" cy="25.1" r="1.00"/><circle cx="-8.8" cy="-26.1" r="1.00"/><circle cx="24.2" cy="13.3" r="1.01"/><circle cx="-26.9" cy="6.5" r="1.01"/><circle cx="15.5" cy="-23.1" r="1.01"/><circle cx="4.2" cy="27.5" r="1.01"/><circle cx="-21.8" cy="-17.5" r="1.02"/><circle cx="28.0" cy="-1.8" r="1.02"/><circle cx="-19.5" cy="20.2" r="1.02"/><circle cx="0.7" cy="-28.2" r="1.02"/><circle cx="18.6" cy="21.3" r="1.03"/><circle cx="-28.2" cy="-3.2" r="1.03"/><circle cx="23.0" cy="-16.7" r="1.03"/><circle cx="-5.6" cy="27.9" r="1.03"/><circle cx="-14.7" cy="-24.5" r="1.04"/><circle cx="27.5" cy="8.1" r="1.04"/><circle cx="-25.8" cy="12.6" r="1.04"/><circle cx="10.5" cy="-26.8" r="1.04"/><circle cx="10.4" cy="26.9" r="1.05"/></g>
 </svg>
-    <h1 class="disp rise" style="--d:.9s">Welcome to <b>Sunflower</b></h1>
+    <h1 class="disp rise" style="--d:.9s"><b>Welcome</b></h1>
   </div>
   <div class="mid">
     <div class="rise" style="--d:1.4s;width:100%;display:flex;justify-content:center">
@@ -132,7 +136,7 @@ h1 b{font-weight:700}
 <script>
 (function(){
   var r=document.documentElement,q=0,x=0,y=0;
-  addEventListener('pointermove',function(e){x=e.clientX;y=e.clientY;if(!q){q=requestAnimationFrame(function(){q=0;r.style.setProperty('--mx',x+'px');r.style.setProperty('--my',y+'px')})}},{passive:true});
+  addEventListener('pointermove',function(e){x=e.clientX;y=e.clientY;if(!q){q=requestAnimationFrame(function(){q=0;r.style.setProperty('--mx',x+'px');r.style.setProperty('--my',y+'px');r.style.setProperty('--px',(x/innerWidth-.5).toFixed(3));r.style.setProperty('--py',(y/innerHeight-.5).toFixed(3))})}},{passive:true});
   addEventListener('load',function(){
     if(window.Atropos&&!matchMedia('(prefers-reduced-motion:reduce)').matches)
       Atropos({el:'.linccard',activeOffset:34,shadowScale:1.02,rotateXMax:11,rotateYMax:11,highlight:true,shadow:true});
