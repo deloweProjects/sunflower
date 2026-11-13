@@ -57,3 +57,6 @@ owner's PC.
 
 The full write-up (all pages, the screenshot pipeline, the Google Form, the CI clean-up) is
 `Vibe/distribution/WEBSITES.md` in the private Linc code repository.
+
+The map of the whole workspace (all three repositories, every folder and what it is for) is `WORKSPACE.md` in
+the private Linc code repository. On the owner's PC this repo is `D:\deloweProjects\yellow\sunflower`.
