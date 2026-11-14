@@ -305,6 +305,7 @@
   html.intro .hero .wrap>:nth-child(3){animation-delay:1.2s}html.intro .hero .wrap>:nth-child(4){animation-delay:1.3s}
   html.intro .hero .wrap>:nth-child(5){animation-delay:1.4s}html.intro .hero .wrap>:nth-child(6){animation-delay:1.55s}
   @media(prefers-reduced-motion:reduce){html.intro::before,html.intro::after{display:none}html.intro nav,html.intro .hero .wrap>*{animation:none;opacity:1}}
+  .hash{word-break:break-all;color:var(--soft)}
   .rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
   .rv.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.note{opacity:1;transform:none}}
@@ -339,7 +340,7 @@
   <h1>Your phone, <span class="grad">on your PC.</span></h1>
   <p class="lead">Notifications, messages, calls, clipboard, files and full screens, both ways, over Wi-Fi or a cable. Pair once and it just stays connected.</p>
   <div class="cta">
-    <a class="btn pri" id="mainBtn" href="https://github.com/deloweProjects/LincApp/releases/latest">
+    <a class="btn pri" id="mainBtn" data-setup href="https://github.com/deloweProjects/LincApp/releases/download/v1.0.0.19/Linc-Setup-1.0.0.19.exe">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v11.2l4-4 1.4 1.4L12 17l-5.4-5.4L8 10.2l3 3V3zM5 19h14v2H5z"/></svg>
       <span id="mainLabel">Download Linc for Windows</span></a>
     <a class="btn" id="altBtn" href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#i-play"/></svg><span id="altLabel">Join the Android test</span></a>
@@ -410,16 +411,16 @@
   <p class="eyebrow rv" id="get">Get started</p>
   <h2 class="rv">Three steps. About two minutes.</h2>
   <div class="steps">
-    <div class="step rv"><h3>Install on your PC</h3><p>Download <b>Linc-Setup</b> and run it. No admin prompt. If Windows says it protected your PC, choose <b>More info</b>, then <b>Run anyway</b>.</p></div>
-    <div class="step rv"><h3>Get it on your phone</h3><p>Android is in closed testing. <a href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener">Sign up with your Google Play email</a>, then install Linc from <a href="https://play.google.com/store/apps/details?id=com.delowe.linc">Google Play</a> once you are added.</p></div>
+    <div class="step rv"><h3>Install on your PC</h3><p>Click <b>Download for Windows</b>, then open the file (<b>Linc-Setup-<span data-ver>1.0.0.19</span>.exe</b>) from your Downloads. No admin prompt. If Windows says it protected your PC, choose <b>More info</b>, then <b>Run anyway</b>.</p></div>
+    <div class="step rv"><h3>Get it on your phone</h3><p>Android is in closed testing. <a href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener">Sign up with your Google Play email</a>. Once you are added, open the <a href="https://play.google.com/apps/testing/com.delowe.linc">tester page</a>, accept the invite, and install Linc from Google Play.</p></div>
     <div class="step rv"><h3>Add a phone</h3><p>On the PC choose <b>Add a phone</b> and point the phone's camera at the code. Done. It reconnects by itself from now on.</p></div>
   </div>
   <div class="cta rv" style="margin-top:48px;justify-content:flex-start">
-    <a class="btn pri" href="https://github.com/deloweProjects/LincApp/releases/latest">Download for Windows</a>
+    <a class="btn pri" data-setup href="https://github.com/deloweProjects/LincApp/releases/download/v1.0.0.19/Linc-Setup-1.0.0.19.exe">Download for Windows</a>
     <a class="btn" href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#i-play"/></svg>Join the Android test</a>
     <a class="btn" href="https://t.me/LincApp">Updates on Telegram</a>
   </div>
-  <p class="fine rv">Android: open to testers only for now. Sign up with the email you use on Google Play, then <a href="https://play.google.com/store/apps/details?id=com.delowe.linc">install from Google Play</a>. The Windows download is <b>Linc-Setup-….exe</b>. Check it against <b>CHECKSUMS.txt</b> on each release.</p>
+  <p class="fine rv">Android: open to testers only for now. Sign up with the email you use on Google Play, then <a href="https://play.google.com/apps/testing/com.delowe.linc">accept the tester invite</a> to install from Google Play. Windows: one file, <b>Linc-Setup-<span data-ver>1.0.0.19</span>.exe</b>. Its SHA-256 is <span class="hash" data-sha>C8AB667C0A1457C7D985983DB8B5AD572546F1E2866D49D61D2E87CCA4069997</span></p>
 </div></section>
 
 <section id="private" class="priv"><div class="wrap grid">
@@ -448,8 +449,8 @@
   <div class="faq rv">
     <details><summary>Is it really free?</summary><p>Yes. No ads, no subscription, no account.</p></details>
     <details><summary>What do I need?</summary><p>A Windows PC (Windows 10 version 1809 or newer) and an Android phone (Android 11 or newer). They connect over the same Wi-Fi, a USB cable, or a hotspot.</p></details>
-    <details><summary>Windows warned me when I ran the installer.</summary><p>Linc is a small independent project and the installer isn't code-signed yet, so SmartScreen warns the first time. Choose <b>More info</b>, confirm the file name says Linc-Setup, then <b>Run anyway</b>. You can verify it first against CHECKSUMS.txt on the release.</p></details>
-    <details><summary>How do I get the Android app?</summary><p>Linc for Android is in a closed test on Google Play. <a href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener">Fill in the sign-up form</a> with the email address you use on Google Play. Once you are added, the <a href="https://play.google.com/store/apps/details?id=com.delowe.linc">Google Play page</a> lets you install it.</p></details>
+    <details><summary>Windows warned me when I ran the installer.</summary><p>Linc is a small independent project and the installer isn't code-signed yet, so SmartScreen warns the first time. Choose <b>More info</b>, confirm the file name says Linc-Setup, then <b>Run anyway</b>. You can compare the file's SHA-256 with the one shown above.</p></details>
+    <details><summary>How do I get the Android app?</summary><p>Linc for Android is in a closed test on Google Play. <a href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener">Fill in the sign-up form</a> with the email address you use on Google Play. Once you are added, open the <a href="https://play.google.com/apps/testing/com.delowe.linc">tester page</a>, accept the invite, and Google Play lets you install it.</p></details>
     <details><summary>Why do I have to sign up first?</summary><p>Google requires new Android apps to run a closed test with real testers before they can go public. Signing up just adds your Google Play account to that test. There is no cost and no account with us.</p></details>
     <details><summary>Does my data go through anyone's server?</summary><p>No. The link is direct between your two devices and encrypted. See our <a href="privacy.html">privacy policy</a>.</p></details>
     <details><summary>Where do I get help or news?</summary><p>On Telegram at <a href="https://t.me/LincApp">t.me/LincApp</a>, or open an issue on <a href="https://github.com/deloweProjects/LincApp/issues">GitHub</a>.</p></details>
@@ -460,7 +461,7 @@
   <img src="linc-icon.png" alt="Linc">
   <h2>Put your phone <span class="grad">where you're already working.</span></h2>
   <div class="cta">
-    <a class="btn pri" href="https://github.com/deloweProjects/LincApp/releases/latest">Download Linc for Windows</a>
+    <a class="btn pri" data-setup href="https://github.com/deloweProjects/LincApp/releases/download/v1.0.0.19/Linc-Setup-1.0.0.19.exe">Download Linc for Windows</a>
     <a class="btn" href="https://forms.gle/G3R2DgVU9dLWwXA56" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#i-play"/></svg>Join the Android test</a>
   </div>
 </div></section>
@@ -473,6 +474,14 @@
 <script>
 (function(){
   var ua=navigator.userAgent||"",rel="https://github.com/deloweProjects/LincApp/releases/latest";
+  fetch("https://raw.githubusercontent.com/deloweProjects/LincApp/main/update.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(d){
+    var u=d&&d.desktop&&d.desktop.url;
+    if(!/^https:\/\/github\.com\/deloweProjects\/LincApp\/releases\/download\/[^\/]+\/Linc-Setup-[0-9.]+\.exe$/.test(u||""))return;
+    document.querySelectorAll("a[data-setup]").forEach(function(a){a.href=u});
+    if(d.latest)document.querySelectorAll("[data-ver]").forEach(function(e){e.textContent=d.latest});
+    if(/^[0-9A-Fa-f]{64}$/.test(d.desktop.sha256||""))document.querySelectorAll("[data-sha]").forEach(function(e){e.textContent=d.desktop.sha256});
+  }).catch(function(){});
+
   if(/Android/i.test(ua)){
     var m=document.getElementById("mainBtn"),al=document.getElementById("altBtn");
     m.href="https://forms.gle/G3R2DgVU9dLWwXA56";document.getElementById("mainLabel").textContent="Join the Android test";
