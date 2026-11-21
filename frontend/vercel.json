@@ -2,6 +2,7 @@
   "routes": [
     { "src": "^/$", "has": [{ "type": "host", "value": "linc.sunflower.co.zw" }], "dest": "/linc/index.html" },
     { "src": "^/(?!linc/)(.*)$", "has": [{ "type": "host", "value": "linc.sunflower.co.zw" }], "dest": "/linc/$1" },
+    { "src": "^/$", "has": [{ "type": "host", "value": "cv.sunflower.co.zw" }], "dest": "/cv/index.html" },
     { "handle": "filesystem" }
   ]
 }

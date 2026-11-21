@@ -146,6 +146,10 @@ h1 b{{font-weight:700}}
 #go.on img{{opacity:1;transform:scale(1)}}
 body.leaving main,body.leaving .word,body.leaving .amb,body.leaving .hud{{transition:opacity .6s,transform .8s cubic-bezier(.7,0,.2,1),filter .6s;opacity:0;transform:scale(.94);filter:blur(10px)}}
 
+/* the private switch: a quiet dot, top left. Three taps flip it; active = slightly squarer */
+#sw{{position:fixed;left:6px;top:6px;width:44px;height:44px;z-index:7;display:grid;place-items:center;cursor:default;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;-webkit-user-select:none;outline:0}}
+#sw i{{display:block;width:8px;height:8px;border-radius:50%;background:var(--ink);opacity:.3;transition:border-radius .35s}}
+#sw.on i{{border-radius:2.5px}}
 .rise{{opacity:0;transform:translateY(24px);filter:blur(8px);animation:rise 1.2s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}}
 @keyframes rise{{to{{opacity:1;transform:none;filter:none}}}}
 @media (max-width:560px){{.word p{{font-size:27vw}}.linccard{{height:210px}}.linccard .nm{{font-size:38px}}}}
@@ -160,6 +164,7 @@ body.leaving main,body.leaving .word,body.leaving .amb,body.leaving .hud{{transi
 <defs><g id="w"><text x="500" y="300" font-size="330" text-anchor="middle">SUN</text><text x="500" y="590" font-size="330" text-anchor="middle">FLOWER</text></g></defs>
 <use href="#w" class="base"/><use href="#w" class="run"/><use href="#w" class="run b"/>
 </svg></div></div>
+<div id="sw" aria-hidden="true"><i></i></div>
 <main>
   <div class="top">
     {sun()}
@@ -298,6 +303,26 @@ body.leaving main,body.leaving .word,body.leaving .amb,body.leaving .hud{{transi
     requestAnimationFrame(function () {{ requestAnimationFrame(function () {{ go.classList.add('on'); }}); }});
     setTimeout(function () {{ location.href = url; }}, 950);
   }});
+}})();
+</script>
+<script>
+/* private switch: 3 taps on the top-left dot turn the cv on/off for THIS browser (cookie shared with cv.sunflower.co.zw). No feedback except the dot's shape. */
+(function () {{
+  var sw = document.getElementById('sw'); if (!sw) return;
+  function isOn() {{ return /(?:^|; )sf_cv=1/.test(document.cookie); }}
+  function paint() {{ sw.className = isOn() ? 'on' : ''; }}
+  function set(on) {{
+    var dom = /(^|\\.)sunflower\\.co\\.zw$/.test(location.hostname) ? ';domain=.sunflower.co.zw' : '';
+    document.cookie = 'sf_cv=' + (on ? '1' : '') + dom + ';path=/;max-age=' + (on ? 31536000 : 0) + ';SameSite=Lax' + (location.protocol === 'https:' ? ';Secure' : '');
+  }}
+  var n = 0, t = 0;
+  sw.addEventListener('click', function () {{
+    clearTimeout(t);
+    if (++n >= 3) {{ n = 0; set(!isOn()); paint(); return; }}
+    t = setTimeout(function () {{ n = 0; }}, 1200);
+  }});
+  paint();
+  addEventListener('pageshow', paint);
 }})();
 </script>
 </body>
