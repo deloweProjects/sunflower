@@ -15,10 +15,6 @@ def sun():
 mail_icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>'
 arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>'
 word = '<em>' + ''.join('<span style="--i:%d">%s</span>' % (i, c) for i, c in enumerate('SUN')) + '</em><em>' + ''.join('<span style="--i:%d">%s</span>' % (i + 3, c) for i, c in enumerate('FLOWER')) + '</em>'
-import urllib.parse
-_g = math.pi * (3 - math.sqrt(5))
-_d = ''.join("<circle cx='%.2f' cy='%.2f' r='%.2f'/>" % (1.22 * math.sqrt(i) * math.cos(i * _g), 1.22 * math.sqrt(i) * math.sin(i * _g), .22 + .3 * i / 55) for i in range(1, 56))
-fav = "data:image/svg+xml," + urllib.parse.quote("<svg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 20 20'><circle r='10' fill='#000'/><g fill='#fff'>" + _d + "</g></svg>")
 letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 mono = 'abcdefghijklmnopqrstuvwxyz0123456789.@-/ '
 grain = "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")"
@@ -33,7 +29,13 @@ html = f'''<!doctype html>
 <meta name="description" content="delowe projects.">
 <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#06070a" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="{fav}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website"><meta property="og:title" content="Sunflower - delowe projects"><meta property="og:description" content="delowe projects.">
+<meta property="og:url" content="https://sunflower.co.zw/"><meta property="og:image" content="https://sunflower.co.zw/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&amp;display=swap&amp;text={letters}%20">
